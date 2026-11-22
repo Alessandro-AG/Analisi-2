@@ -1,0 +1,265 @@
+% !TeX root = ../analisi_2.tex
+
+\section{Integrazione multipla}
+
+\subsection{Domini normali}
+
+\begin{oss}
+    Data una funzione $f : A \sube \R^2 \rarr \R$, il suo grafico è la superficie
+    \[
+        z = f(x,y), \qquad (x,y) \in A.
+    \]
+    Se $f \ge 0$, la regione di spazio compresa tra $A$ e il grafico di $f$ si chiama \textbf{cilindroide} di $f$:
+    \[
+        C_f = \{ (x,y,z) \in \R^3 : (x,y) \in A,\; 0 \le z \le f(x,y) \}.
+    \]
+\end{oss}
+
+\pencilnote{C'è il problema delle ``partizioni'': sono ``curve'' (non rettangoli).
+    Come si risolve?}
+
+La risposta sta nel lavorare con insiemi del piano di un tipo particolare, che possiamo ``affettare'' in modo semplice: i \textbf{domini normali}.
+
+\begin{definition}[Dominio normale rispetto a $x$]
+    Si dice \textbf{dominio normale rispetto a $x$} (in $\R^2$) l'insieme
+    \[
+        D = \{ (x,y) \in \R^2 : a \le x \le b,\; \alpha(x) \le y \le \beta(x) \}
+    \]
+    con $\alpha \le \beta$ e $\alpha$, $\beta$ continue.
+\end{definition}
+
+\pencilnote{Se ``taglio'' in verticale ho ``un pezzo'', se ``taglio'' in orizzontale potrei averne di più.}
+
+\begin{definition}[Dominio normale rispetto a $y$]
+    Un insieme si dice \textbf{normale rispetto a $y$} se
+    \[
+        D = \{ (x,y) \in \R^2 : c \le y \le d,\; \gamma(y) \le x \le \delta(y) \}
+    \]
+    con $\gamma \le \delta$ e $\gamma$, $\delta$ continue.
+\end{definition}
+
+\begin{definition}[Area di un dominio normale]
+    L'\textbf{area} di $D$ (ovvero la sua \emph{misura}) si indica con $m(D)$ ed è data da
+    \[
+        m(D) = \int_a^b \big( \beta(x) - \alpha(x) \big) \,dx
+        \qquad \text{se $D$ è normale rispetto a } x,
+    \]
+    \[
+        m(D) = \int_c^d \big( \delta(y) - \gamma(y) \big) \,dy
+        \qquad \text{se $D$ è normale rispetto a } y.
+    \]
+\end{definition}
+
+\pencilnote{L'integranda è positiva poiché $\beta \ge \alpha$ (e $\delta \ge \gamma$).}
+
+\subsection{Partizioni in domini normali}
+
+\begin{definition}[Partizione in domini normali]
+    Sia $D$ un dominio normale. Si chiama \textbf{partizione di $D$ in domini normali} la seguente famiglia
+    \[
+        \mathcal{P} = \{ D_1, D_2, \dots, D_N \}
+    \]
+    tale che
+    \begin{enumerate}[1)]
+        \item $D_i$ sono tutti normali $\forall i$;
+        \item $\displaystyle D = \bigcup_{i=1}^{N} D_i$;
+        \item $\overset{\circ}{D_i} \cap \overset{\circ}{D_j} = \emptyset \quad \forall i \neq j$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma*}[senza dimostrazione]
+    Sia $D$ un dominio normale. Allora esiste una partizione di $D$ in domini normali (fitta quanto si vuole).
+\end{lemma*}
+
+%   \include{Novembre/16-11}
+%   \include{Novembre/19-11}
+
+\subsection{Integrali doppi}
+
+Sia $f : D \sube \R^2 \rarr \R$, con $D$ un dominio normale del piano, e sia $f$ \textbf{limitata}.
+Per il lemma visto in precedenza esiste una partizione di $D$ in domini normali
+\[
+    \mathcal{P} = \{ D_1, D_2, \dots, D_N \}.
+\]
+
+Poiché $f$ è limitata, possiamo porre
+\[
+    m_i = \inf_{D_i} f(x,y) < +\infty, \qquad
+    M_i = \sup_{D_i} f(x,y) < +\infty .
+\]
+
+Allora possiamo definire le seguenti \textbf{somme integrali}:
+\begin{align*}
+    s(\mathcal{P}, f) &= \sum_{i=1}^{N} m(D_i) \cdot m_i
+    && \text{(somma integrale inferiore relativa a $f$ rispetto a $\mathcal{P}$)} \\
+    S(\mathcal{P}, f) &= \sum_{i=1}^{N} m(D_i) \cdot M_i
+    && \text{(somma integrale superiore relativa a $f$ rispetto a $\mathcal{P}$)}
+\end{align*}
+dove $m(D_i)$ indica l'area di $D_i$.
+
+\begin{lemma}
+    Siano $\mathcal{P}$ e $\mathcal{Q}$ due partizioni di $D$ in domini normali. Allora
+    \[
+        s(\mathcal{P}, f) \le S(\mathcal{Q}, f).
+    \]
+\end{lemma}
+
+Siano
+\begin{align*}
+    A &= \{ s(\mathcal{P}, f) \,,\; \mathcal{P} \text{ partizione} \} \sube \R, \\
+    B &= \{ S(\mathcal{P}, f) \,,\; \mathcal{P} \text{ partizione} \} \sube \R.
+\end{align*}
+Per il lemma, $A$ e $B$ sono \textbf{separati}.
+
+\begin{definition}[Integrale doppio]
+    Se $A$ e $B$ sono \textbf{contigui}, ovvero $\sup A = \inf B = c$, allora l'elemento di separazione $c$ prende il nome di
+    \textbf{integrale doppio} di $f$ su $D$ e si indica con
+    \[
+        \iint_D f(x,y) \,dx\,dy .
+    \]
+    In tal caso $f$ si dice \textbf{integrabile secondo Riemann} su $D$.
+\end{definition}
+
+\begin{oss}[Misura di Peano--Jordan]
+    La misura di Riemann è la misura di Peano--Jordan.
+
+    \pencilnote{Divido in due ``gabbie'': una esterna e una interna.
+        La gabbia interna è fatta di rettangoli e, detta $A(R_{\mathcal{P}}) = \sum_i A(R_i)$ l'area di un plurirettangolo contenuto in $D$, si pone
+        \[
+            m_i = \sup \{ A(R_{\mathcal{P}}) \,;\; R_{\mathcal{P}} \sube D \} \qquad \text{(misura interna)}
+        \]
+        Analogamente per l'esterna:
+        \[
+            m_e = \inf \{ A(R_{\mathcal{P}}) \,;\; R_{\mathcal{P}} \supseteq D \} \qquad \text{(misura esterna)}
+        \]
+        Se $m_i = m_e$, il separatore è detto misura di Peano--Jordan.
+        Lebesgue invece ``approssima'' con compatti interni e aperti esterni.}
+\end{oss}
+
+\subsection{Proprietà dell'integrale doppio}
+
+\begin{enumerate}[1)]
+    \item \textbf{Linearità:}
+          \[
+              \iint_D (\alpha f + \beta g) \,dx\,dy = \alpha \iint_D f \,dx\,dy + \beta \iint_D g \,dx\,dy .
+          \]
+    \item \textbf{Monotonia:} se $f \le g$ allora
+          \[
+              \iint_D f \,dx\,dy \le \iint_D g \,dx\,dy .
+          \]
+    \item \textbf{Additività:} se $D = \displaystyle\bigcup_{i=1}^{k} D_i$ con $D_i$ normale $\forall i$ e $\overset{\circ}{D_i} \cap \overset{\circ}{D_j} = \emptyset$ per $i \neq j$, allora
+          \[
+              \iint_D f \,dx\,dy = \sum_{i=1}^{k} \iint_{D_i} f \,dx\,dy .
+          \]
+\end{enumerate}
+
+\begin{theorem*}[Integrabilità delle funzioni continue]
+    Se $f$ è continua, allora è integrabile.
+\end{theorem*}
+
+\begin{prop*}[Teorema della media (stima)]
+    Se $f$ è continua, allora
+    \[
+        m(D) \cdot \min_D f \;\le\; \iint_D f \,dx\,dy \;\le\; m(D) \cdot \max_D f .
+    \]
+\end{prop*}
+
+\subsection{Formule di riduzione}
+
+\begin{theorem*}[Formule di riduzione (senza dimostrazione)]
+    Sia $D$ normale e sia $f \colon D \sube \R^2 \rarr \R$ continua.
+
+    Se $D$ è normale rispetto a $x$, ovvero $D = \{ a \le x \le b,\ \alpha(x) \le y \le \beta(x) \}$, risulta
+    \[
+        \iint_D f(x,y) \,dx\,dy = \int_a^b \left[ \int_{\alpha(x)}^{\beta(x)} f(x,y) \,dy \right] dx .
+    \]
+
+    Se invece $D$ è normale rispetto a $y$, ovvero $D = \{ c \le y \le d,\ \gamma(y) \le x \le \delta(y) \}$, si ha
+    \[
+        \iint_D f(x,y) \,dx\,dy = \int_c^d \left[ \int_{\gamma(y)}^{\delta(y)} f(x,y) \,dx \right] dy .
+    \]
+\end{theorem*}
+
+\pencilnote{Fissata una $x$, la zona colorata è un rettangoloide.}
+
+\begin{esercizio}
+    Calcolare
+    \[
+        \iint_E x e^y \,dx\,dy, \qquad E = \{ 0 \le x \le 1,\ x^2 + y^2 \le 1,\ y \ge 0 \}.
+    \]
+\end{esercizio}
+
+\begin{solution}
+    $E$ è il quarto di cerchio unitario nel primo quadrante, quindi può essere scritto in entrambi i modi:
+    \[
+        E = \{ x \in [0,1],\ 0 \le y \le \sqrt{1 - x^2} \}
+        \qquad \text{oppure} \qquad
+        E = \{ y \in [0,1],\ 0 \le x \le \sqrt{1 - y^2} \}.
+    \]
+
+    \medskip
+    \textbf{Prima parametrizzazione} (normale rispetto a $x$):
+    \[
+        \iint_E x e^y \,dx\,dy
+        = \int_0^1 \left[ x \int_0^{\sqrt{1-x^2}} e^y \,dy \right] dx
+        = \int_0^1 x \left[ e^{\sqrt{1-x^2}} - e^0 \right] dx
+        = \int_0^1 x\, e^{\sqrt{1-x^2}} \,dx - \int_0^1 x \,dx .
+    \]
+    Nel primo integrale poniamo $t = \sqrt{1-x^2}$, da cui
+    \[
+        dt = \frac{-2x}{2\sqrt{1-x^2}} \,dx = -\frac{x}{t} \,dx
+        \quad \Longrightarrow \quad -t \,dt = x \,dx,
+    \]
+    con $x = 0 \mapsto t = 1$ e $x = 1 \mapsto t = 0$. Quindi
+    \[
+        \int_0^1 x\, e^{\sqrt{1-x^2}} \,dx = \int_1^0 e^t (-t) \,dt = \int_0^1 t e^t \,dt
+        = \Big[ e^t (t - 1) \Big]_0^1 = 1,
+    \]
+    e dunque
+    \[
+        \iint_E x e^y \,dx\,dy = 1 - \frac{1}{2} = \frac{1}{2}.
+    \]
+
+    \medskip
+    \textbf{Seconda parametrizzazione} (``l'altra'', normale rispetto a $y$):
+    \[
+        \iint_E x e^y \,dx\,dy
+        = \int_0^1 e^y \left[ \int_0^{\sqrt{1-y^2}} x \,dx \right] dy
+        = \int_0^1 e^y \left[ \frac{x^2}{2} \right]_0^{\sqrt{1-y^2}} dy
+        = \int_0^1 e^y \, \frac{1 - y^2}{2} \,dy .
+    \]
+    Integrando due volte per parti:
+    \[
+        \frac{1}{2} \int_0^1 e^y (1 - y^2) \,dy
+        = \frac{1}{2} \Big[ e^y (1 - y^2) + 2 e^y (y - 1) \Big]_0^1
+        = \frac{1}{2} \Big[ e^y (-y^2 + 2y - 1) \Big]_0^1
+        = \frac{1}{2} \big( 0 + 1 \big) = \frac{1}{2},
+    \]
+    in accordo con il primo calcolo.
+\end{solution}
+
+\begin{esercizio}
+    Calcolare
+    \[
+        \iint_D \frac{\sin y}{y} \,dx\,dy, \qquad D = \{ 0 \le x \le 1,\ \pi x \le y \le \pi \}.
+    \]
+\end{esercizio}
+
+\begin{solution}
+    Integrando prima in $y$ si avrebbe
+    \[
+        \int_0^1 \left[ \int_{\pi x}^{\pi} \frac{\sin y}{y} \,dy \right] dx = \; ??
+    \]
+    ma $\dfrac{\sin y}{y}$ non ha una primitiva elementare. Conviene allora descrivere $D$ come dominio normale rispetto a $y$:
+    \[
+        D = \left\{ 0 \le y \le \pi,\ 0 \le x \le \frac{y}{\pi} \right\}.
+    \]
+    Risulta
+    \[
+        \iint_D \frac{\sin y}{y} \,dx\,dy
+        = \int_0^{\pi} \left[ \frac{\sin y}{y} \int_0^{y/\pi} dx \right] dy
+        = \int_0^{\pi} \frac{\sin y}{\pi} \,dy
+        = \left[ -\frac{\cos y}{\pi} \right]_0^{\pi}
+        = \frac{2}{\pi} .
+    \]
+\end{solution}

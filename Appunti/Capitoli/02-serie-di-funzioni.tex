@@ -1,0 +1,145 @@
+% !TeX root = ../analisi_2.tex
+
+\section{Serie di funzioni}
+
+\subsection{Definizioni e convergenza}
+
+\begin{definition}
+Sia $f_n : I \subseteq \mathbb{R} \to \mathbb{R}$, $\forall n \in \mathbb{N}$, una successione di funzioni. Si chiama \textbf{serie di funzioni} di termine generale $f_n(x)$, e si indica con
+$$\sum_{n=1}^{+\infty} f_n(x),$$
+la successione di funzioni delle \textbf{somme parziali} definita da
+$$S_1(x) = f_1(x), \quad S_2(x) = S_1(x) + f_2(x), \quad \dots, \quad S_n(x) = S_{n-1}(x) + f_n(x).$$
+\begin{itemize}
+\item Diremo che la serie \textbf{converge puntualmente} alla somma $S(x)$ in $I$ se $S_n(x) \xrightarrow{\text{P}} S(x)$ in $I$.
+\item Diremo che la serie \textbf{converge uniformemente} alla somma $S(x)$ in $I$ se $S_n(x) \xrightarrow{\text{U}} S(x)$ in $I$.
+\end{itemize}
+\end{definition}\begin{oss}
+La convergenza uniforme della serie implica la convergenza puntuale della serie, ma non vale il viceversa:
+$$\text{Conv. uniforme} \implies \text{Conv. puntuale}, \qquad \text{Conv. uniforme} \not\Longleftarrow \text{Conv. puntuale}.$$
+\end{oss}\begin{example}[Serie geometrica di funzioni]
+Consideriamo la serie
+$$\sum_{n=0}^{\infty} x^n, \quad x \in \mathbb{R}.$$
+\begin{itemize}
+\item \textbf{Convergenza puntuale:} da quanto noto sulla serie geometrica numerica, la serie converge puntualmente in $]-1, 1[$ alla funzione somma
+$$S(x) = \frac{1}{1 - x}.$$
+\item \textbf{Convergenza uniforme:} calcoliamo l'estremo superiore dello scarto in $]-1, 1[$ \pencilnote{(ricordando che $S_n(x)$ è la somma parziale di una progressione geometrica)}:
+$$\sup_{]-1, 1[} \vert{}S_n(x) - S(x)\vert{} = \sup_{]-1, 1[} \left\vert{} \frac{1 - x^{n+1}}{1 - x} - \frac{1}{1 - x} \right\vert{} = \sup_{]-1, 1[} \left\vert{} -\frac{x^{n+1}}{1 - x} \right\vert{} = \sup_{]-1, 1[} \frac{\vert{}x\vert{}^{n+1}}{1 - x} = +\infty$$
+\pencilnote{(per $x \to 1^-$ il rapporto diverge a $+\infty$)}, quindi la serie \textbf{non converge uniformemente} in $]-1, 1[$.Per avere convergenza uniforme è necessario allontanarsi da $x = 1$, restringendosi a intervalli del tipo $\vert{}x\vert{} \le r$ (ovvero $[-r, r]$) con $0 < r < 1$.
+\end{itemize}
+\end{example}\begin{example}[Serie a segno alterno]
+Studiamo la serie
+$$\sum_{n=1}^{\infty} (-1)^n \frac{x^2 + n}{n^2}, \quad x \in [-1, 1].$$
+\begin{itemize}
+\item \textbf{Convergenza puntuale:} per ogni fissato $x \in [-1, 1]$, la serie converge puntualmente per il criterio di Leibniz.
+\item \textbf{Convergenza uniforme:} sfruttiamo la stima del resto fornita dal criterio di Leibniz, secondo cui $\vert{}S_n(x) - S(x)\vert{} \le a_{n+1}(x)$ (il primo termine trascurato):
+$$\sup_{[-1, 1]} \vert{}S_n(x) - S(x)\vert{} \le \sup_{[-1, 1]} a_{n+1}(x) = \sup_{[-1, 1]} \frac{x^2 + n + 1}{(n+1)^2} = \frac{n + 2}{(n+1)^2} \xrightarrow{n \to \infty} 0$$
+\pencilnote{(dove l'estremo superiore è assunto per $x = \pm 1$)}. Pertanto la serie \textbf{converge uniformemente} in $[-1, 1]$.
+\end{itemize}
+\end{example}
+
+\subsection{Convergenza assoluta}
+
+\begin{definition}
+Sia $f_n : I \subseteq \mathbb{R} \to \mathbb{R}$ per ogni $n \in \mathbb{N}$. La serie $\sum_{n=1}^{\infty} f_n(x)$ \textbf{converge assolutamente} in $I$ se converge puntualmente in $I$ la serie dei moduli
+$$\sum_{n=1}^{\infty} \vert{}f_n(x)\vert{}.$$
+\end{definition}\begin{example}
+Riprendiamo il termine generale $f_n(x) = (-1)^n \frac{x^2 + n}{n^2}$ per $x \in [-1, 1]$. Passando ai moduli si ha
+$$\vert{}f_n(x)\vert{} = \frac{x^2 + n}{n^2}.$$
+Confrontando asintoticamente con $\frac{1}{n}$:
+$$\lim_{n \to \infty} \frac{\frac{x^2 + n}{n^2}}{\frac{1}{n}} = \lim_{n \to \infty} \frac{n^2 + x^2 n}{n^2} = 1,$$
+dunque $\sum_{n=1}^{\infty} \frac{x^2 + n}{n^2}$ \textbf{diverge} per confronto con la serie armonica con $\alpha = 1$.
+\end{example}\begin{oss}
+La serie dell'esempio precedente converge uniformemente in $[-1, 1]$ ma non converge assolutamente. Di conseguenza, non sussiste alcuna implicazione generale tra convergenza assoluta e convergenza uniforme.
+\end{oss}
+
+\subsection{Criteri di Cauchy per le serie}
+
+Sia $f_n : I \subseteq \mathbb{R} \to \mathbb{R}$ una successione di funzioni.\begin{theorem}[Criterio di Cauchy per la convergenza puntuale]
+La serie $\sum_{n=1}^{\infty} f_n(x)$ converge puntualmente in $I$ se e solo se
+$$\forall x \in I, \ \forall \varepsilon > 0 \ \exists \nu_{\varepsilon, x} > 0 : \quad \vert{}S_{n+p}(x) - S_n(x)\vert{} = \vert{}f_{n+1}(x) + \dots + f_{n+p}(x)\vert{} < \varepsilon \quad \forall p \in \mathbb{N}, \ \forall n > \nu_{\varepsilon, x}.$$
+\end{theorem}\begin{proof}
+Discende direttamente dal criterio di Cauchy per le serie numeriche applicato punto per punto per ogni $x \in I$ fissato.
+\end{proof}\begin{theorem}[Criterio di Cauchy per la convergenza uniforme]
+La serie $\sum_{n=1}^{\infty} f_n(x)$ converge uniformemente in $I$ se e solo se
+$$\forall \varepsilon > 0 \ \exists \nu_{\varepsilon} > 0 : \quad \vert{}S_{n+p}(x) - S_n(x)\vert{} = \vert{}f_{n+1}(x) + \dots + f_{n+p}(x)\vert{} < \varepsilon \quad \forall p \in \mathbb{N}, \ \forall n > \nu_{\varepsilon}, \ \forall x \in I.$$
+\end{theorem}Dalla condizione di Cauchy segue la \textbf{condizione necessaria per la convergenza di una serie}:\begin{prop}[Condizione necessaria]
+Sia $f_n : I \subseteq \mathbb{R} \to \mathbb{R}$ per ogni $n \in \mathbb{N}$.
+\begin{itemize}
+\item Se $\sum_{n=1}^{\infty} f_n(x)$ converge puntualmente in $I$, allora $f_n(x) \xrightarrow{\text{P}} 0$ in $I$.
+\item Se $\sum_{n=1}^{\infty} f_n(x)$ converge uniformemente in $I$, allora $f_n(x) \xrightarrow{\text{U}} 0$ in $I$.
+\end{itemize}
+\end{prop}\begin{proof}
+Dimostriamo il caso uniforme. Poiché $\sum_{n=1}^{\infty} f_n(x)$ converge uniformemente in $I$, verifica la condizione di Cauchy uniforme:
+$$\forall \varepsilon > 0 \ \exists \nu_{\varepsilon} > 0 : \quad \vert{}f_{n+1}(x) + \dots + f_{n+p}(x)\vert{} < \varepsilon \quad \forall n > \nu_{\varepsilon}, \ \forall p \in \mathbb{N}, \ \forall x \in I.$$
+Scelto $p = 1$, si ottiene $\vert{}f_{n+1}(x)\vert{} < \varepsilon$ per ogni $n > \nu_{\varepsilon}$ e per ogni $x \in I$, ovvero $\sup_{I} \vert{}f_{n+1}(x) - 0\vert{} \to 0$, cioè $f_n \xrightarrow{\text{U}} 0$ in $I$.
+\end{proof}
+
+\subsection{Totale convergenza}
+
+Per formulare delle condizioni sufficienti alla convergenza uniforme è necessario introdurre una nuova nozione di convergenza.\begin{definition}
+Sia $f_n : I \subseteq \mathbb{R} \to \mathbb{R}$ per ogni $n \in \mathbb{N}$. Diremo che $\sum_{n=1}^{\infty} f_n(x)$ \textbf{converge totalmente} in $I$ se esiste una successione numerica $M_n > 0$ tale che:
+\begin{enumerate}
+\item $\vert{}f_n(x)\vert{} \le M_n \quad \forall n \in \mathbb{N}, \ \forall x \in I$;
+\item la serie numerica $\sum_{n=1}^{\infty} M_n$ converge.
+\end{enumerate}
+\end{definition}Nella pratica, la successione $M_n$ può essere scelta ponendo $M_n = \sup_{I} \vert{}f_n(x)\vert{}$, che coincide con la stessa quantità calcolata nella verifica della condizione necessaria per la convergenza uniforme di una serie.\begin{oss}[Implicazioni]
+$$\text{Convergenza totale} \implies \text{Convergenza assoluta} \implies \text{Convergenza puntuale}.$$
+Infatti, per confronto, la serie dei moduli $\sum_{n=1}^{\infty} \vert{}f_n(x)\vert{}$ è maggiorata dalla serie numerica convergente $\sum_{n=1}^{\infty} M_n$, e la convergenza assoluta implica a sua volta la convergenza semplice (puntuale).
+\end{oss}\begin{theorem}[Criterio di Weierstrass]
+Sia $f_n : I \subseteq \mathbb{R} \to \mathbb{R}$ per ogni $n \in \mathbb{N}$. Se la serie $\sum_{n=1}^{\infty} f_n(x)$ \textbf{converge totalmente} in $I$, allora $\sum_{n=1}^{\infty} f_n(x)$ \textbf{converge uniformemente} in $I$.
+\end{theorem}\begin{proof}
+Si sfrutta il criterio di Cauchy uniforme. Poiché per ipotesi la serie converge totalmente in $I$, esiste una successione $M_n > 0$ tale che:
+\begin{enumerate}
+\item $\vert{}f_n(x)\vert{} \le M_n \quad \forall n \in \mathbb{N}, \ \forall x \in I$;
+\item $\sum_{n=1}^{\infty} M_n$ converge, dunque per il criterio di Cauchy per le serie numeriche si ha che
+$$\forall \varepsilon > 0 \ \exists \nu_{\varepsilon} > 0 : \quad M_{n+1} + \dots + M_{n+p} < \varepsilon \quad \forall p \in \mathbb{N}, \ \forall n > \nu_{\varepsilon}.$$
+\end{enumerate}
+Mostriamo che vale la condizione di Cauchy uniforme. Fissato $\varepsilon > 0$, per ogni $p \in \mathbb{N}$, per ogni $n > \nu_{\varepsilon}$ e per ogni $x \in I$, stimiamo lo scarto $\vert{}S_{n+p}(x) - S_n(x)\vert{}$:
+$$\vert{}f_{n+1}(x) + \dots + f_{n+p}(x)\vert{} \le \vert{}f_{n+1}(x)\vert{} + \dots + \vert{}f_{n+p}(x)\vert{} \le M_{n+1} + \dots + M_{n+p} < \varepsilon,$$
+dove si sono usate nell'ordine la disuguaglianza triangolare, la prima ipotesi di maggiorazione e la condizione di Cauchy sulla serie $\sum M_n$. Pertanto la serie converge uniformemente in $I$.
+\end{proof}\begin{oss}
+Non vale il viceversa del criterio di Weierstrass: la convergenza uniforme non implica la convergenza totale. L'esempio della serie a segno alterno $\sum_{n=1}^{\infty} (-1)^n \frac{x^2 + n}{n^2}$ in $[-1, 1]$ lo dimostra: essa converge uniformemente ma non converge assolutamente, quindi non può convergere totalmente.
+\end{oss}
+
+\subsection{Criterio di integrazione per serie}
+
+\begin{theorem}[Integrazione per serie]
+Sia $f_n : [a, b] \to \mathbb{R}$ integrabile per ogni $n \in \mathbb{N}$. Se $\sum_{n=1}^{\infty} f_n(x)$ converge uniformemente a $S(x)$ in $[a, b]$, allora
+$$\sum_{n=1}^{\infty} \int_a^b f_n(x) \, dx = \int_a^b \sum_{n=1}^{\infty} f_n(x) \, dx = \int_a^b S(x) \, dx.$$
+\end{theorem}\begin{proof}
+Consideriamo la successione delle somme parziali degli integrali:
+$$I_n = \sum_{k=1}^{n} \int_a^b f_k(x) \, dx = \int_a^b f_1(x) \, dx + \dots + \int_a^b f_n(x) \, dx = \int_a^b \underbrace{\left[ f_1(x) + \dots + f_n(x) \right]}_{S_n(x)} \, dx.$$
+\end{proof}
+
+\subsection{Teorema di derivazione per serie}
+
+\begin{theorem}[Derivazione per serie]
+Sia $f_n : [a, b] \to \mathbb{R}$ una successione di funzioni tale che:
+\begin{enumerate}
+    \item $f_n \in C^1([a, b])$ per ogni $n \in \mathbb{N}$;
+    \item $\sum_{n=1}^{\infty} f_n(x) \xrightarrow{\text{P}} S(x)$ in $[a, b]$;
+    \item $\sum_{n=1}^{\infty} f'_n(x) \xrightarrow{\text{U}} G(x)$ in $[a, b]$.
+\end{enumerate}
+Allora $S(x) \in C^1([a, b])$ e
+\[
+S'(x) = G(x) \qquad \forall x \in [a, b].
+\]
+\end{theorem}
+
+\begin{proof}
+Per l'ipotesi (1), $f_n \in C^1([a, b]) \implies f'_n \in C^0([a, b])$. Per l'ipotesi (3), $\sum_{n=1}^{\infty} f'_n(x) \xrightarrow{\text{U}} G(x)$ in $[a, b]$, dunque $G(x)$ è continua su $[a, b]$ \pencilnote{(come limite uniforme di funzioni continue)}.
+
+Applichiamo il teorema fondamentale del calcolo integrale a ciascuna $f_n$:
+\[
+f_n(x) = f_n(a) + \int_a^x f'_n(t) \, dt.
+\]
+Passando alle somme parziali di ordine $k$, si ottiene:
+\[
+\sum_{n=1}^{k} f_n(x) = \sum_{n=1}^{k} f_n(a) + \sum_{n=1}^{k} \int_a^x f'_n(t) \, dt.
+\]
+Passando al limite per $k \to +\infty$ e sfruttando il teorema di integrazione per serie sulla serie delle derivate (che converge uniformemente a $G$), segue che:
+\[
+S(x) = S(a) + \int_a^x G(t) \, dt
+\]
+\pencilnote{(dove la funzione integrale appartiene a $C^1([a, b])$ poiché $G$ è continua)}. Infine, per il teorema fondamentale del calcolo integrale, si conclude che $S \in C^1([a, b])$ e $S'(x) = G(x)$.
+\end{proof}

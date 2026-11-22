@@ -1,0 +1,516 @@
+%================================
+% note-setup-printer.tex
+% Printer-friendly version
+%================================
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{extarrows}
+
+\usepackage[a4paper, margin=1cm, footskip=0.5cm]{geometry}
+\usepackage{float}
+\usepackage{indentfirst}
+\usepackage{booktabs,multirow}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{appendix}
+
+%================================
+% FIX GLOBALE PER LISTE DOPO I TEOREMI
+%================================
+
+\makeatletter
+\AddToHook{env/itemize/begin}{%
+    \if@inlabel\mbox{}\par\vspace{-\baselineskip}\fi
+}
+\AddToHook{env/enumerate/begin}{%
+    \if@inlabel\mbox{}\par\vspace{-\baselineskip}\fi
+}
+\makeatother
+
+%================================
+% PACCHETTI GRAFICI
+%================================
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{pifont}
+\usepackage{graphicx}
+
+\graphicspath{
+    {./figure/}{./figures/}
+    {./image/}{./images/}
+    {./graphic/}{./graphics/}
+    {./picture/}{./pictures/}
+}
+
+\usepackage{subcaption}
+
+%================================
+% ALGORITMI E CODICE
+%================================
+
+\usepackage[ruled,linesnumbered,noline]{algorithm2e}
+\usepackage{listings}
+
+\lstdefinestyle{simpleStyle}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    stringstyle=\color{violet},
+    commentstyle=\color[RGB]{34,139,34},
+    showstringspaces=false,
+    numbers=left,
+    numbersep=2em,
+    numberstyle=\footnotesize,
+    frame=single,
+    framesep=1em,
+}
+
+\lstset{style=simpleStyle}
+
+%================================
+% HYPERREF
+%================================
+
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=cyan,
+    citecolor=black
+}
+
+%================================
+% TEOREMI E TCOLORBOX
+%================================
+
+\usepackage[most]{tcolorbox}
+\usepackage{keytheorems}
+
+%================================
+% STILE GENERALE: SOLO BARRA SINISTRA
+%================================
+
+\tcbset{
+    theorem box/.style={
+        enhanced,
+        breakable,
+        sharp corners,
+        boxrule=0pt,
+        leftrule=2pt,
+        rightrule=0pt,
+        toprule=0pt,
+        bottomrule=0pt,
+        colback=white,
+        boxsep=3pt,
+        left=5pt,
+        right=2pt,
+        top=3pt,
+        bottom=3pt,
+        before skip=6pt,
+        after skip=6pt,
+    },
+}
+
+%================================
+% STILI UFFICIALI KEYTHEOREMS
+%================================
+
+\newkeytheoremstyle{breakplain}{
+    inherit-style=plain,
+    headpunct={},
+    break
+}
+
+\newkeytheoremstyle{breakdefinition}{
+    inherit-style=definition,
+    headpunct={},
+    break
+}
+
+\newkeytheoremstyle{breakremark}{
+    inherit-style=remark,
+    headpunct={},
+    break
+}
+
+\newkeytheoremstyle{notestyle}{
+    headfont=\color{orange!80!black}\bfseries,
+    bodyfont=\normalfont,
+    spaceabove=3pt,
+    spacebelow=3pt,
+    headpunct={},
+    break,
+    qed=\ensuremath{\color{orange!80!black}\diamond}
+}
+
+\newkeytheoremstyle{solutionstyle}{
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    spaceabove=3pt,
+    spacebelow=3pt,
+    headpunct={},
+    break,
+    qed=\ensuremath{\square}
+}
+
+%================================
+% DEFINIZIONE AMBIENTI
+%================================
+
+% TEOREMI - Viola
+
+\newkeytheorem{theorem}[
+    style=breakplain,
+    name=Teorema,
+    numbered=true,
+    parent=section,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=RoyalPurple
+    }
+]
+
+\newkeytheorem{theorem*}[
+    style=breakplain,
+    name=Teorema,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=RoyalPurple
+    }
+]
+
+% PROPOSIZIONI - Viola
+
+\newkeytheorem{prop}[
+    style=breakplain,
+    name=Proposizione,
+    numbered=true,
+    sibling=theorem,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=RoyalPurple
+    }
+]
+
+\newkeytheorem{prop*}[
+    style=breakplain,
+    name=Proposizione,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=RoyalPurple
+    }
+]
+
+% COROLLARI - Blu
+
+\newkeytheorem{corollary}[
+    style=breakplain,
+    name=Corollario,
+    numbered=true,
+    sibling=theorem,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=NavyBlue
+    }
+]
+
+\newkeytheorem{corollary*}[
+    style=breakplain,
+    name=Corollario,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=NavyBlue
+    }
+]
+
+% LEMMI - Blu
+
+\newkeytheorem{lemma}[
+    style=breakplain,
+    name=Lemma,
+    numbered=true,
+    sibling=theorem,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=NavyBlue
+    }
+]
+
+\newkeytheorem{lemma*}[
+    style=breakplain,
+    name=Lemma,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=NavyBlue
+    }
+]
+
+% CLAIM - Blu
+
+\newkeytheorem{claim}[
+    style=breakplain,
+    name=Claim,
+    numbered=true,
+    sibling=theorem,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=NavyBlue
+    }
+]
+
+\newkeytheorem{claim*}[
+    style=breakplain,
+    name=Claim,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=NavyBlue
+    }
+]
+
+% DEFINIZIONI - Verde
+
+\newkeytheorem{definition}[
+    style=breakdefinition,
+    name=Definizione,
+    numbered=true,
+    parent=section,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=ForestGreen
+    }
+]
+
+\newkeytheorem{definition*}[
+    style=breakdefinition,
+    name=Definizione,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=ForestGreen
+    }
+]
+
+% ESEMPI - Terra
+
+\newkeytheorem{example}[
+    style=breakdefinition,
+    name=Esempio,
+    numbered=true,
+    parent=section,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=RawSienna
+    }
+]
+
+\newkeytheorem{example*}[
+    style=breakdefinition,
+    name=Esempio,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=RawSienna
+    }
+]
+
+% ESERCIZI - Rosso
+
+\newkeytheorem{esercizio}[
+    style=breakdefinition,
+    name=Esercizio,
+    numbered=true,
+    parent=section,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=WildStrawberry!70
+    }
+]
+
+\newkeytheorem{esercizio*}[
+    style=breakdefinition,
+    name=Esercizio,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=WildStrawberry!70
+    }
+]
+
+% OSSERVAZIONI - Senza riquadro
+
+\newkeytheorem{oss}[
+    style=breakremark,
+    name=Osservazione,
+    numbered=true,
+    parent=section
+]
+
+\newkeytheorem{oss*}[
+    style=breakremark,
+    name=Osservazione,
+    numbered=false
+]
+
+% NOTE - Arancione
+
+\newcommand{\notehandmark}{%
+    \raisebox{0.05ex}{\large\ding{45}}\hspace{0.4em}%
+}
+
+\newkeytheorem{note}[
+    style=notestyle,
+    name={\notehandmark Nota},
+    numbered=true,
+    parent=section,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=orange!80!black
+    }
+]
+
+\newkeytheorem{note*}[
+    style=notestyle,
+    name={\notehandmark Nota},
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=orange!80!black
+    }
+]
+
+% SOLUZIONI - Nero
+
+\newkeytheorem{solution}[
+    style=solutionstyle,
+    name=Soluzione,
+    numbered=true,
+    parent=section,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=black!65
+    }
+]
+
+\newkeytheorem{solution*}[
+    style=solutionstyle,
+    name=Soluzione,
+    numbered=false,
+    tcolorbox-no-titlebar={
+        theorem box,
+        colframe=black!65
+    }
+]
+
+%================================
+% COVER (INVARIATA)
+%================================
+
+\usepackage{titling}
+
+\newcommand{\extrainfocontent}{}
+
+\newcommand{\extrainfo}[1]{%
+    \renewcommand{\extrainfocontent}{#1}%
+}
+
+\newcommand{\makecover}[1]{%
+    \begingroup
+    \hypersetup{pageanchor=false}
+    \begin{titlepage}
+        \newgeometry{margin=0in}
+        \parindent=0pt
+
+        \includegraphics[width=\linewidth]{#1}
+
+        \vfill
+
+        \begin{center}
+            \parbox{0.618\textwidth}{
+                \raggedleft
+                {\bfseries \Huge \thetitle}
+                \\[0.6pt]
+                \rule{0.618\textwidth}{4pt}
+                \\
+            }
+        \end{center}
+
+        \vfill
+
+        \begin{center}
+            \parbox{0.618\textwidth}{
+                \raggedleft\Large
+                \begin{tabular}{r}
+                    \theauthor \\
+                    \thedate
+                \end{tabular}
+            }
+        \end{center}
+
+        \vfill
+
+        \begin{center}
+            \parbox[t]{0.7\textwidth}{
+                \centering
+                \itshape
+                \extrainfocontent
+            }
+        \end{center}
+
+        \vfill
+    \end{titlepage}
+
+    \restoregeometry
+    \endgroup
+}
+
+%================================
+% DIMOSTRAZIONI
+%================================
+
+\renewcommand{\proofname}{Dimostrazione}
+
+\makeatletter
+
+\renewenvironment{proof}[1][\proofname]{%
+    \par
+    \pushQED{\qed}
+    \normalfont
+    \topsep6\p@\@plus6\p@\relax
+    \trivlist
+    \item[\hskip\labelsep\bfseries #1]
+    \ignorespaces\leavevmode\par\nobreak
+}{%
+    \popQED
+    \endtrivlist
+    \@endpefalse
+}
+
+\makeatother
+
+% Dimostrazioni: barra verde petrolio
+
+\tcolorboxenvironment{proof}{
+    theorem box,
+    colframe=TealBlue
+}
+
+%================================
+% PENCIL NOTE
+%================================
+
+\newcommand{\pencilnote}[1]{%
+    {\color{gray!80!black}#1}%
+}
+
+%================================
+% FINE TEMPLATE
+%================================

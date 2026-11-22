@@ -1,0 +1,71 @@
+\documentclass{article}
+%\input{../Templates/note-setup-leftbar.tex}
+\input{../Templates/note-setup-leftbar-printer-friendly.tex}
+%  --- Variabili personalizzate ---
+\def\notetitle{Analisi 2}
+\def\noteauthor{
+    \textbf{Alessandro Alongi Gattone} \\
+    Appunti di Analisi 2}
+\def\notedate{Anno Accademico 2026/2027}
+
+
+
+
+% Comandi matematici
+\newcommand{\sube}{\subseteq}
+\newcommand{\sub}{\subset}
+\newcommand{\notsub}{\not\subset}
+\newcommand{\rarr}{\rightarrow}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\conv}[1]{\xrightarrow{\mathrm{#1}}}
+
+\let\oldforall\forall
+\renewcommand{\forall}{\;\oldforall}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+
+
+\begin{document}
+\title{\textbf{\LARGE{\notetitle} \vspace*{10\baselineskip}}}
+\author{\noteauthor}
+\date{\notedate}
+\maketitle
+\newpage
+\setcounter{tocdepth}{2}
+\tableofcontents
+\newpage
+
+
+
+% --- Includi Capitoli ---
+% Un file per capitolo (\section); i sottocapitoli (\subsection) stanno dentro ai file.
+
+% --- Successioni e serie di funzioni ---
+\include{Capitoli/01-successioni-di-funzioni}
+\include{Capitoli/02-serie-di-funzioni}
+\include{Capitoli/03-serie-di-potenze}
+
+% --- Spazio R^n, curve e funzioni di più variabili ---
+\include{Capitoli/04-topologia-in-Rn}
+\include{Capitoli/05-curve}
+\include{Capitoli/06-funzioni-di-piu-variabili}
+\include{Capitoli/07-integrali-curvilinei}
+
+% --- Calcolo differenziale ---
+\include{Capitoli/08-calcolo-differenziale}
+\include{Capitoli/09-estremi-liberi-e-taylor}
+\include{Capitoli/10-funzioni-implicite-ed-estremi-vincolati}
+
+% --- Forme differenziali e integrazione multipla ---
+\include{Capitoli/11-forme-differenziali-lineari}
+\include{Capitoli/12-integrazione-multipla}
+\include{Capitoli/13-cambio-di-variabili}
+
+
+\end{document}

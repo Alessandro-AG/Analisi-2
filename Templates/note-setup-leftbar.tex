@@ -1,0 +1,242 @@
+%================================
+% note-setup-leftbar.tex
+% fenglielie@qq.com 2026-08-21
+%================================
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{extarrows}
+\usepackage[a4paper, margin=1cm, footskip=0.5cm]{geometry}
+\usepackage{float}
+\usepackage{indentfirst}
+\usepackage{booktabs,multirow}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{appendix}
+
+%%================================
+%% FIX GLOBALE PER LISTE DOPO I TEOREMI
+%%================================
+% Risolve il "primo punto a destra del titolo" quando itemize/enumerate 
+% seguono immediatamente l'apertura di un ambiente theorem-like.
+\makeatletter
+\AddToHook{env/itemize/begin}{\if@inlabel\mbox{}\par\vspace{-\baselineskip}\fi}
+\AddToHook{env/enumerate/begin}{\if@inlabel\mbox{}\par\vspace{-\baselineskip}\fi}
+\makeatother
+%%================================
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{pifont}
+\usepackage{graphicx}
+\graphicspath{
+    {./figure/}{./figures/}{./image/}{./images/}{./graphic/}{./graphics/}{./picture/}{./pictures/}
+}
+\usepackage{subcaption}
+
+\usepackage[ruled,linesnumbered,noline]{algorithm2e}
+\usepackage{listings}
+\lstdefinestyle{simpleStyle}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    stringstyle=\color{violet},
+    commentstyle=\color[RGB]{34,139,34},
+    showstringspaces=false,
+    numbers=left,
+    numbersep=2em,
+    numberstyle=\footnotesize,
+    frame=single,
+    framesep=1em,
+}
+\lstset{style=simpleStyle}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,linkcolor=,urlcolor=cyan
+}
+
+\usepackage[most]{tcolorbox}
+\usepackage{keytheorems}
+
+\tcbset{
+    theorem box/.style={
+            enhanced,
+            breakable,
+            sharp corners,
+            leftrule=2pt,
+            rightrule=0pt,
+            toprule=0pt,
+            bottomrule=0pt,
+        },
+    theorem box rounded/.style={
+            theorem box,
+            rounded corners,
+        }
+}
+
+%%================================
+%% STILI UFFICIALI KEYTHEOREMS
+%%================================
+\newkeytheoremstyle{breakplain}{
+    inherit-style=plain,
+    headpunct={},
+    break
+}
+\newkeytheoremstyle{breakdefinition}{
+    inherit-style=definition,
+    headpunct={},
+    break
+}
+\newkeytheoremstyle{breakremark}{
+    inherit-style=remark,
+    headpunct={},
+    break
+}
+\newkeytheoremstyle{notestyle}{
+    headfont=\color{orange!80!black}\bfseries,
+    bodyfont=\normalfont,
+    spaceabove=3pt,
+    spacebelow=3pt,
+    headpunct={},
+    break,
+    qed=\ensuremath{\color{orange!80!black}\diamond}
+}
+\newkeytheoremstyle{solutionstyle}{
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    spaceabove=3pt,
+    spacebelow=3pt,
+    headpunct={},
+    break,
+    qed=\ensuremath{\square}
+}
+
+%%================================
+%% DEFINIZIONE AMBIENTI
+%%================================
+
+\newkeytheorem{theorem}[style=breakplain, name=Teorema, numbered=true, parent=section,
+    tcolorbox-no-titlebar={theorem box, colframe=RoyalPurple, colback=RoyalPurple!8}]
+\newkeytheorem{theorem*}[style=breakplain, name=Teorema, numbered=false,
+    tcolorbox-no-titlebar={theorem box rounded, colframe=RoyalPurple, colback=RoyalPurple!8}]
+
+\newkeytheorem{prop}[style=breakplain, name=Proposizione, numbered=true, sibling=theorem,
+    tcolorbox-no-titlebar={theorem box, colframe=RoyalPurple, colback=RoyalPurple!8}]
+\newkeytheorem{prop*}[style=breakplain, name=Proposizione, numbered=false,
+    tcolorbox-no-titlebar={theorem box rounded, colframe=RoyalPurple, colback=RoyalPurple!8}]
+
+\newkeytheorem{corollary}[style=breakplain, name=Corollario, numbered=true, sibling=theorem,
+    tcolorbox-no-titlebar={theorem box, colframe=NavyBlue, colback=SkyBlue!8}]
+\newkeytheorem{corollary*}[style=breakplain, name=Corollario, numbered=false,
+    tcolorbox-no-titlebar={theorem box rounded, colframe=NavyBlue, colback=SkyBlue!8}]
+
+\newkeytheorem{lemma}[style=breakplain, name=Lemma, numbered=true, sibling=theorem,
+    tcolorbox-no-titlebar={theorem box, colframe=NavyBlue, colback=SkyBlue!8}]
+\newkeytheorem{lemma*}[style=breakplain, name=Lemma, numbered=false,
+    tcolorbox-no-titlebar={theorem box rounded, colframe=NavyBlue, colback=SkyBlue!8}]
+
+\newkeytheorem{claim}[style=breakplain, name=Claim, numbered=true, sibling=theorem,
+    tcolorbox-no-titlebar={theorem box, colframe=NavyBlue, colback=SkyBlue!8}]
+\newkeytheorem{claim*}[style=breakplain, name=Claim, numbered=false,
+    tcolorbox-no-titlebar={theorem box rounded, colframe=NavyBlue, colback=SkyBlue!8}]
+
+\newkeytheorem{definition}[style=breakdefinition, name=Definizione, numbered=true, parent=section,
+    tcolorbox-no-titlebar={theorem box, colframe=ForestGreen, colback=ForestGreen!5}]
+\newkeytheorem{definition*}[style=breakdefinition, name=Definizione, numbered=false,
+    tcolorbox-no-titlebar={theorem box rounded, colframe=ForestGreen, colback=ForestGreen!5}]
+
+\newkeytheorem{example}[style=breakdefinition, name=Esempio, numbered=true, parent=section,
+    tcolorbox-no-titlebar={theorem box, colframe=RawSienna, colback=RawSienna!5}]
+\newkeytheorem{example*}[style=breakdefinition, name=Esempio, numbered=false,
+    tcolorbox-no-titlebar={theorem box rounded, colframe=RawSienna, colback=RawSienna!5}]
+
+\newkeytheorem{esercizio}[style=breakdefinition, name=Esercizio, numbered=true, parent=section,
+    tcolorbox-no-titlebar={theorem box, colframe=WildStrawberry!30, colback=WildStrawberry!5}]
+\newkeytheorem{esercizio*}[style=breakdefinition, name=Esercizio, numbered=false,
+    tcolorbox-no-titlebar={theorem box rounded, colframe=WildStrawberry!30, colback=WildStrawberry!5}]
+
+\newkeytheorem{oss}[style=breakremark, name=Osservazione, numbered=true, parent=section]
+\newkeytheorem{oss*}[style=breakremark, name=Osservazione, numbered=false]
+
+\newcommand{\notehandmark}{%
+    \raisebox{0.05ex}{\large\ding{45}}\hspace{0.4em}%
+}
+\newkeytheorem{note}[style=notestyle, name={\notehandmark Nota}, numbered=true, parent=section]
+\newkeytheorem{note*}[style=notestyle, name={\notehandmark Nota}, numbered=false]
+
+\newkeytheorem{solution}[style=solutionstyle, name=Soluzione, numbered=true, parent=section]
+\newkeytheorem{solution*}[style=solutionstyle, name=Soluzione, numbered=false]
+
+%%================================
+%% COVER (Invariata)
+%%================================
+\usepackage{titling}
+\newcommand{\extrainfo}{}
+\renewcommand{\extrainfo}[1]{\renewcommand{\extrainfocontent}{#1}}
+\newcommand{\extrainfocontent}{}
+\newcommand{\makecover}[1]{%
+    \begingroup
+    \hypersetup{pageanchor=false}%
+    \begin{titlepage}
+        \newgeometry{margin=0in}
+        \parindent=0pt
+        \includegraphics[width=\linewidth]{#1} % size = 1280*1024
+        \vfill
+        \begin{center}
+            \parbox{0.618\textwidth}{%
+                \raggedleft{\bfseries \Huge \thetitle} \\[0.6pt]
+                \rule{0.618\textwidth}{4pt} \\
+            }
+        \end{center}
+        \vfill
+        \begin{center}
+            \parbox{0.618\textwidth}{%
+                \raggedleft\Large
+                \begin{tabular}{r}
+                    \theauthor \\
+                    \thedate   \\
+                \end{tabular}%
+            }
+        \end{center}
+        \vfill
+        \begin{center}
+            \parbox[t]{0.7\textwidth}{\centering \itshape \extrainfocontent}
+        \end{center}
+        \vfill
+    \end{titlepage}
+    \restoregeometry
+    \endgroup
+}
+
+%================================
+% DIMOSTRAZIONI (amsthm nativo)
+%================================
+
+\renewcommand{\proofname}{Dimostrazione}
+
+% Ridefinizione nativa e sicura di amsthm per forzare l'a capo e il titolo in grassetto nero.
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\bfseries #1]\ignorespaces\leavevmode\par\nobreak
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+% Wrappare l'ambiente proof in tcolorbox nel modo più sicuro previsto dal pacchetto stesso.
+\tcolorboxenvironment{proof}{
+    theorem box,
+    colframe=TealBlue,
+    colback=TealBlue!5
+}
+
+%================================
+% PENCIL NOTE
+%================================
+% Versione inline pura che supporta andate a capo interne (doppio invio o \\)
+\newcommand{\pencilnote}[1]{{\color{gray!80!black}#1}}

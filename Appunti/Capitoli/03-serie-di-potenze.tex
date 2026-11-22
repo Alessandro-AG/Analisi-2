@@ -1,0 +1,345 @@
+% !TeX root = ../analisi_2.tex
+
+\section{Serie di potenze}
+
+\subsection{Definizione e insieme di convergenza}
+
+\begin{definition}
+Sia $\{a_n\}_{n \in \mathbb{N}_0}$ una successione numerica e sia $x_0 \in \mathbb{R}$. Si chiama \textbf{serie di potenze} di \textbf{punto iniziale} $x_0$ e \textbf{coefficienti} $a_n$ (detti anche termine generale) la seguente serie di funzioni:
+\[
+\sum_{n=0}^{+\infty} a_n (x - x_0)^n = a_0 + a_1 (x - x_0) + a_2 (x - x_0)^2 + \dots + a_n (x - x_0)^n + \dots, \quad x \in \mathbb{R}
+\]
+\pencilnote{(dove il termine generale della serie di funzioni è $f_n(x) = a_n (x - x_0)^n$)}.
+\end{definition}
+
+\begin{oss}
+La serie di potenze converge sempre in almeno un punto: il suo punto iniziale $x = x_0$, dove ha per somma $a_0$.
+\end{oss}
+
+\begin{oss}
+A meno di effettuare la sostituzione $y = x - x_0$, possiamo limitarci a studiare soltanto le serie di potenze centrate in $x_0 = 0$, ovvero della forma
+\[
+\sum_{n=0}^{\infty} a_n y^n.
+\]
+\end{oss}
+
+\begin{definition}
+Sia $\sum_{n=0}^{\infty} a_n x^n$ una serie di potenze. Si chiama \textbf{insieme di convergenza} della serie il seguente sottoinsieme di $\mathbb{R}$:
+\[
+X = \left\{ x \in \mathbb{R} \ \middle|\ \sum_{n=0}^{\infty} a_n x^n \text{ converge} \right\}.
+\]
+\end{definition}
+
+\begin{oss}
+L'insieme di convergenza è sempre non vuoto ($X \neq \emptyset$), poiché $0 \in X$.
+\end{oss}
+
+\begin{definition}
+Si chiama \textbf{raggio di convergenza} della serie di potenze il valore
+\[
+\rho = \sup X.
+\]
+\end{definition}
+
+\begin{oss}
+Risulta sempre $\rho \ge 0$ (con $\rho \in [0, +\infty]$).
+\end{oss}
+
+\begin{example}
+Consideriamo la serie geometrica $\sum_{n=0}^{\infty} x^n$.
+\begin{itemize}
+    \item L'insieme di convergenza puntuale è $X = ]-1, 1[$, da cui $\rho = 1$.
+    \item In ogni intervallo chiuso $[-r, r]$ con $0 < r < 1$ ($\vert r \vert < 1$) si ha convergenza totale.
+\end{itemize}
+\end{example}
+
+\subsection{Raggio di convergenza}
+
+\begin{theorem}
+Sia $\sum_{n=0}^{+\infty} a_n x^n$ una serie di potenze. Allora si ha:
+\begin{enumerate}
+    \item[(i)] Se esiste $x_1 \neq 0$ tale che $x_1 \in X$ (cioè la serie converge in $x_1$), allora la serie converge \textbf{assolutamente} per ogni $x \in ]-\vert x_1 \vert, \vert x_1 \vert[$ e \textbf{totalmente} in $[-r, r]$ per ogni $0 < r < \vert x_1 \vert$.
+    \item[(ii)] Se la serie \textbf{non converge} in un certo $x_2 \in \mathbb{R}$, allora \textbf{non converge} per ogni $x \in \mathbb{R}$ tale che $\vert x \vert > \vert x_2 \vert$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{(i)} Sia $x_1 \neq 0$ tale che la serie converge in $x_1$, ovvero $\sum_{n=0}^{\infty} a_n x_1^n$ converge. Per la condizione necessaria di convergenza delle serie si ha
+\[
+a_n x_1^n \xrightarrow{n \to \infty} 0 \implies \vert a_n x_1^n \vert \le M \quad \forall n \in \mathbb{N}_0
+\]
+\pencilnote{(poiché ogni successione convergente è limitata)}.
+
+Proviamo che vi è convergenza assoluta in $]-\vert x_1 \vert, \vert x_1 \vert[$. Sia $x \in \mathbb{R}$ tale che $0 \le \vert x \vert < \vert x_1 \vert$ e dimostriamo che converge la serie dei moduli $\sum_{n=0}^{+\infty} \vert a_n x^n \vert$. Poiché $x_1 \neq 0$, possiamo maggiorare il termine generale nel modo seguente:
+\[
+\vert a_n x^n \vert = \vert a_n x_1^n \vert \left\vert \frac{x}{x_1} \right\vert^n \le M \left( \frac{\vert x \vert}{\vert x_1 \vert} \right)^n = M \frac{\vert x \vert^n}{\vert x_1 \vert^n} \quad \forall n \in \mathbb{N}_0.
+\]
+Passando alle serie si ha dunque
+\[
+\sum_{n=0}^{+\infty} \vert a_n x^n \vert \le M \sum_{n=0}^{+\infty} \left( \frac{\vert x \vert}{\vert x_1 \vert} \right)^n,
+\]
+e il secondo membro converge per ogni $x$ con $\vert x \vert < \vert x_1 \vert$ in quanto serie geometrica di ragione $\frac{\vert x \vert}{\vert x_1 \vert} < 1$.
+
+Inoltre, fissato $0 < r < \vert x_1 \vert$, per ogni $x \in [-r, r]$ (ossia $\vert x \vert \le r$) si ha
+\[
+\vert a_n x^n \vert \le M \left( \frac{r}{\vert x_1 \vert} \right)^n =: M_n.
+\]
+Poiché $\sum_{n=0}^{+\infty} M_n$ converge essendo una serie geometrica numerica di ragione $\frac{r}{\vert x_1 \vert} < 1$, la serie di potenze converge totalmente in $[-r, r]$.
+
+\textbf{(ii)} Sia $x_2 \in \mathbb{R}$ tale che $\sum_{n=0}^{\infty} a_n x_2^n$ non converge; dobbiamo dimostrare che la serie non converge per alcun $x \in \mathbb{R}$ con $\vert x \vert > \vert x_2 \vert$.
+
+Supponiamo, per fissare le idee, $x > 0$ \pencilnote{(il caso $x < 0$ è del tutto analogo)} con $\vert x \vert > \vert x_2 \vert$, e supponiamo \textbf{per assurdo} che la serie converga in $x$. Allora, per il punto (i), la serie dovrebbe convergere in tutto l'intervallo $]-\vert x \vert, \vert x \vert[$. Ma poiché $\vert x_2 \vert < \vert x \vert$, si ha $x_2 \in ]-\vert x \vert, \vert x \vert[$, quindi la serie convergerebbe anche in $x_2$, il che è assurdo.
+\end{proof}
+
+\begin{theorem}
+Sia $\sum_{n=0}^{\infty} a_n x^n$ una serie di potenze e sia $\rho$ il suo raggio di convergenza. Allora si ha:
+\begin{enumerate}
+    \item[(i)] $\rho = 0 \iff$ la serie converge solo in $x = 0$ \pencilnote{(ovvero $X = \{0\}$)}.
+    \item[(ii)] $\rho = +\infty \iff$ la serie converge \textbf{assolutamente} (e puntualmente) in tutto $\mathbb{R}$ e \textbf{totalmente} nei compatti $[-r, r]$ con $r > 0$ \pencilnote{(ovvero $X = \mathbb{R}$)}.
+    \item[(iii)] Se $0 < \rho < +\infty$, allora la serie converge \textbf{assolutamente} in $]-\rho, \rho[$, converge \textbf{totalmente} in $[-r, r]$ per ogni $0 < r < \rho$, e \textbf{non converge} per $\vert x \vert > \rho$.
+\end{enumerate}
+\end{theorem}
+
+\pencilnote{Nel caso $0 < \rho < +\infty$, l'insieme di convergenza $X$ può coincidere con $]-\rho, \rho[$, con $[-\rho, \rho]$, oppure con uno dei due intervalli semiaperti $]-\rho, \rho]$ o $[-\rho, \rho[$, a seconda del comportamento della serie agli estremi $\pm \rho$.}
+
+\subsection{Calcolo del raggio di convergenza}
+
+Sorgono quindi due domande naturali:
+\begin{enumerate}
+    \item Che cosa succede agli estremi $\pm \rho$ (anche rispetto alla convergenza uniforme)?
+    \item Come si calcola il raggio di convergenza $\rho$?
+\end{enumerate}
+
+\begin{theorem}[Criterio di Hadamard]
+Sia $\sum_{n=0}^{+\infty} a_n x^n$ una serie di potenze. Se esiste
+\[
+\lim_{n \to +\infty} \sqrt[n]{\vert a_n \vert} = \ell,
+\]
+allora il raggio di convergenza è dato da
+\[
+\rho = \begin{cases}
+0 & \text{se } \ell = +\infty, \\
++\infty & \text{se } \ell = 0, \\
+\dfrac{1}{\ell} & \text{se } 0 < \ell < +\infty,
+\end{cases}
+\]
+ovvero, in forma compatta, $\rho = \dfrac{1}{\ell}$.
+\end{theorem}
+
+\pencilnote{Esempio: per la serie $\sum_{n=1}^{\infty} \frac{x^n}{n}$ si ha $a_n = \frac{1}{n}$, da cui $\frac{1}{\rho} = \lim_{n \to +\infty} \frac{1}{\sqrt[n]{n}} = 1 \implies \rho = 1$, quindi $X \supseteq ]-1, 1[$.}
+
+\begin{proof}
+Applichiamo il criterio della radice alla serie dei moduli $\sum_{n=0}^{+\infty} \vert a_n \vert \vert x \vert^n$:
+\[
+\lim_{n \to +\infty} \sqrt[n]{\vert a_n \vert \vert x \vert^n} = \lim_{n \to +\infty} \sqrt[n]{\vert a_n \vert} \cdot \vert x \vert = \ell \cdot \vert x \vert
+\]
+\pencilnote{(per ipotesi)}. Distinguiamo i tre casi possibili per $\ell$:
+\begin{itemize}
+    \item Se $\ell = +\infty$, allora $\ell \cdot \vert x \vert = +\infty > 1$ per ogni $x \neq 0$, dunque la serie non converge mai al di fuori dell'origine e $\rho = 0$.
+    \item Se $\ell = 0$, allora $\ell \cdot \vert x \vert = 0 < 1$ per ogni $x \in \mathbb{R}$, dunque la serie converge sempre e $\rho = +\infty$.
+    \item Se $0 < \ell < +\infty$, per il criterio della radice la serie converge quando $\ell \cdot \vert x \vert < 1$, ossia per $\vert x \vert < \frac{1}{\ell}$ (mentre non converge per $\vert x \vert > \frac{1}{\ell}$), da cui $\rho = \frac{1}{\ell}$.
+\end{itemize}
+\end{proof}
+
+\begin{theorem}[Criterio di D'Alembert]
+Sia $\sum_{n=0}^{+\infty} a_n x^n$ una serie di potenze (con $a_n \neq 0$ definitivamente). Se esiste
+\[
+\lim_{n \to +\infty} \left\vert \frac{a_{n+1}}{a_n} \right\vert = \ell,
+\]
+allora
+\[
+\rho = \frac{1}{\ell},
+\]
+dove si sottintende l'estensione dell'algebra dei limiti (ossia $\rho = +\infty$ se $\ell = 0$ e $\rho = 0$ se $\ell = +\infty$).
+\end{theorem}
+
+\begin{proof}
+Ovvia, come conseguenza immediata del criterio del rapporto per le serie numeriche applicato alla serie dei moduli (oppure del legame tra criterio del rapporto e della radice).
+\end{proof}
+
+\subsection{Teorema di Abel (S.d.)}
+
+\begin{theorem}[Teorema di Abel]
+Sia $\sum_{n=0}^{+\infty} a_n x^n$ una serie di pot. e sia $0 < \rho < +\infty$ il suo raggio di conv. Se la serie conv. in $x = \rho$ (o in $x = -\rho$) allora la serie conv. \underline{uniformemente} in ogni intervallo del tipo $[y, \rho]$ (o $[-\rho, y]$) con $-\rho < y < \rho$.
+
+Se conv. sia in $x = \rho$ che in $x = -\rho$ allora conv. unif. in $[-\rho, \rho]$.
+\end{theorem}
+
+\begin{example}
+$\sum \frac{(-1)^n}{n} x^n$ \pencilnote{(con $a_n = \frac{(-1)^n}{n}$)} $\implies \frac{1}{\rho} = \lim_{n} \sqrt[n]{\vert a_n \vert} = \lim_{n} \sqrt[n]{\left\vert \frac{(-1)^n}{n} \right\vert} = 1 \implies \rho = 1 \implies$ la serie conv. punt. $]-1, 1[$ e tot. in $[-r, r]$, $0 < r < 1$.
+
+Stud. conv. unif.:
+\begin{itemize}
+    \item $x = -1 : \sum \frac{(-1)^n}{n} (-1)^n = \sum \frac{1}{n} \implies$ diverge
+    \item $x = 1 : \sum \frac{(-1)^n}{n} 1^n = \sum \frac{(-1)^n}{n} \implies$ Leibniz $\implies$ conv. $\implies$ la serie $\sum \frac{(-1)^n}{n} x^n$ conv. punt. in $]-1, 1]$ e unif. in $[y, 1]$ con $\vert y \vert < 1$.
+\end{itemize}
+\end{example}
+
+\pencilnote{%
+\begin{example*}
+$\sum_{n=1}^{+\infty} \frac{(x-1)^n}{n^2} \to x - 1 = y \to \sum_{n=1}^{+\infty} \frac{y^n}{n^2} \to \rho = 1 \implies$ conviene studiare in $y = 1$ così che conv. ass. anche in $y = -1 \implies [-1, 1] \implies -1 \le x - 1 \le 1 \implies 0 \le x \le 2$.
+\end{example*}%
+}
+
+\subsection{Continuità e convergenza totale}
+
+\[
+\sum_{n=0}^{+\infty} a_n x^n \to S(x) \text{ cont. in } ]-\rho, \rho[, \quad \rho > 0
+\]
+\pencilnote{(cont. e tot. nel compatto)}.
+
+\subsection{Serie derivate}
+
+\[
+\sum_{n=0}^{+\infty} a_n x^n \xrightarrow{\text{serie der.}} \sum_{n=1}^{+\infty} n a_n x^{n-1} = \sum_{n=0}^{+\infty} b_{n+1} x^n \quad \text{serie di pot.}
+\]
+\pencilnote{(con $b_n = n a_n$)}.
+
+\begin{prop}
+Sia $\sum_{n=0}^{\infty} a_n x^n$ una serie di pot. e $\sum_{n=1}^{+\infty} n a_n x^{n-1}$ la sua serie derivata $\implies$ hanno lo stesso raggio di conv.
+\end{prop}
+
+\begin{proof}
+\pencilnote{Uso il C.R.:} chiamiamo $\rho$ il rag. di conv. della ``serie madre'' e sia $\tilde{\rho}$ quello della serie der. Dim. che $\rho = \tilde{\rho}$.
+
+Ma per il c. di Hadamard $\implies \frac{1}{\rho} = \lim_{n \to +\infty} \sqrt[n]{\vert a_n \vert}$
+\[
+\frac{1}{\tilde{\rho}} = \lim_{n \to +\infty} \sqrt[n]{n \vert a_n \vert} = \lim_{n} \sqrt[n]{n} \cdot \sqrt[n]{\vert a_n \vert} = \frac{1}{\rho}
+\]
+\pencilnote{(poiché $\lim_n \sqrt[n]{n} = 1$)}.
+\end{proof}
+
+\subsection{Serie degli integrali}
+
+\[
+\sum_{n=0}^{\infty} a_n x^n \xrightarrow{\text{serie degli integrali}} \implies \text{integro tra } [0, x], \quad \vert x \vert < \rho, \ \rho > 0 \implies
+\]
+\[
+\implies \sum_{n=0}^{+\infty} a_n \int_0^x t^n \, dt = \sum_{n=0}^{+\infty} a_n \frac{x^{n+1}}{n+1} = \sum_{n=1}^{+\infty} a_{n-1} \frac{x^n}{n} \implies
+\]
+è una serie di pot., la uso come ``serie madre'' $\implies \sum_{n=0}^{\infty} a_n x^n$ ha lo stesso raggio di conv. (noto come serie delle der.)
+
+\begin{theorem}[Teo der. per serie verso serie di pot.]
+Sia $\sum_{n=0}^{\infty} a_n x^n$ una serie di pot. e sia $S(x)$ la sua somma in $]-\rho, \rho[$.
+
+Allora $S(x)$ è derivabile in $]-\rho, \rho[$ e risulta che
+\[
+S'(x) = \sum_{n=1}^{+\infty} n a_n x^{n-1} \quad \text{in } ]-\rho, \rho[
+\]
+\pencilnote{(itero $\implies S(x) \in C^\infty(]-\rho, \rho[)$)}.
+\end{theorem}
+
+\begin{theorem}[Teo int. per serie verso serie di pot.]
+Sia $\sum_{n=0}^{+\infty} a_n x^n$ con $\rho > 0$ e sia $S(x)$ la sua somma.
+
+Allora
+\[
+\sum_{n=0}^{+\infty} a_n \frac{x^{n+1}}{n+1} = \int_0^x S(t) \, dt
+\]
+\end{theorem}
+
+\pencilnote{%
+\begin{example*}
+$\sum_{n=1}^{+\infty} n x^n$ (scrivo come der. di una serie geom.) in $]-1, 1[$:
+\[
+x \sum_{n=1}^{+\infty} n x^{n-1} = x \sum_{n=0}^{+\infty} \frac{d}{dx}(x^n) = x \frac{d}{dx} \sum_{n=0}^{+\infty} x^n = x \cdot \frac{d}{dx}\left(\frac{1}{1-x}\right) = \frac{x}{(1-x)^2} \implies \sum_{n=1}^{+\infty} n x^n = \frac{x}{(1-x)^2}
+\]
+\end{example*}
+
+\begin{example*}
+$\sum \frac{x^n}{n^2 - 1} \to$ uso fratti semplici per avere somma.
+\end{example*}
+
+\begin{example*}
+$\sum_{n=1}^{+\infty} \frac{(-1)^n (\log(x))^n}{n^3 + 1} \to -\log x = y \implies \sum_{n=1}^{+\infty} \frac{y^n}{n^3 + 1}$.
+\end{example*}%
+}
+
+\subsection{Serie di Taylor}
+
+\begin{definition}
+Sia $f(x) \in C^\infty(]a, b[)$ e sia $x_0 \in ]a, b[$. Si chiama \underline{serie di Taylor} di $f$ di p. iniz. $x_0$ la seg.
+\[
+\sum_{n=0}^{+\infty} \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n = f(x_0) + f'(x_0)(x - x_0) + \dots
+\]
+\pencilnote{(con $a_n = \frac{f^{(n)}(x_0)}{n!}$)}.
+\end{definition}
+
+\begin{example}[Es. 1]
+\[
+f(x) = \begin{cases}
+e^{-1/x^2} & \text{se } x \neq 0 \\
+0 & \text{se } x = 0
+\end{cases}
+\]
+\[
+f'(x) = \begin{cases}
+e^{-1/x^2} \cdot \frac{2}{x^3} & \text{se } x \neq 0 \\
+0 & \text{se } x = 0
+\end{cases} \to f^{(n)}(0) = 0 \quad \forall n \implies f(x) \in C^\infty(\mathbb{R})
+\]
+Se scrivessi serie di Taylor in $x_0 = 0 \implies$ avrei $f(x) = 0 \to$ falso per $x \neq 0$.
+\end{example}
+
+\begin{theorem}[Teorema di analiticità della somma di una serie di pot.]
+Sia $x_0 \in \mathbb{R}$ e sia $\sum_{n=0}^{\infty} a_n (x - x_0)^n$ una serie di pot. con $\rho > 0$ e sia $f(x)$ la somma in $]x_0 - \rho, x_0 + \rho[$.
+
+Allora $f \in C^\infty(]x_0 - \rho, x_0 + \rho[)$ e la serie di partenza è la sua serie di Taylor centrata in $x_0$, ovvero
+\[
+a_n = \frac{f^{(n)}(x_0)}{n!}
+\]
+\end{theorem}
+
+\begin{proof}
+In $]x_0 - \rho, x_0 + \rho[$ si ha
+\[
+f(x) = \sum_{n=0}^{+\infty} a_n (x - x_0)^n \implies f(x_0) = a_0
+\]
+\[
+f'(x) = \sum_{n=1}^{+\infty} a_n n (x - x_0)^{n-1} \implies f'(x_0) = a_1 \cdot 1 = a_1
+\]
+\[
+f''(x) = \sum_{n=2}^{+\infty} a_n n(n-1)(x - x_0)^{n-2} \implies f''(x_0) = 2 a_2 \implies \frac{f''(x_0)}{2} = a_2
+\]
+\pencilnote{Si dim. per induzione.}
+\end{proof}
+
+\begin{definition}
+Sia $f : ]a, b[ \to \mathbb{R}$ e $f \in C^\infty(]a, b[)$.
+
+Sia $x_0 \in ]a, b[$, $f$ si dice \underline{analitica} in $x_0$ se
+\[
+\exists I(x_0) \text{ intorno di } x_0 : \quad f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n \quad \text{in } I(x_0).
+\]
+Si dice analitica in $]a, b[$ se lo è $\forall x_0 \in ]a, b[$.
+\end{definition}
+
+\pencilnote{%
+\begin{example*}
+$\log(1+x) \xrightarrow{\text{der.}} \frac{1}{1+x} = \sum_{n=0}^{\infty} (-x)^n \xrightarrow{\text{integro}} \log(1+x) = \sum_{n=0}^{\infty} \int_0^x (-t)^n \, dt = \sum_{n=0}^{+\infty} (-1)^n \frac{x^{n+1}}{n+1} = \sum_{n=1}^{+\infty} \frac{x^n}{n} (-1)^{n+1} = x - \frac{x^2}{2} + \frac{x^3}{3} - \dots$
+\end{example*}%
+}
+
+\subsection{Criterio di analiticità}
+
+\begin{theorem}[Criterio di analiticità]
+Sia $f \in C^\infty(]a, b[)$. Se $\exists M, L > 0$ tali che
+\[
+\vert f^{(k)}(x) \vert \le M L^k \qquad \forall x \in ]a, b[, \ \forall k \in \mathbb{N}
+\]
+allora $f$ è analitica in $]a, b[$.
+\end{theorem}
+
+\begin{proof}
+Cons. il resto di Lagrange di $f$:
+\[
+R_n(x) = \frac{f^{(n+1)}(x_1)}{(n+1)!} (x - x_0)^{n+1}
+\]
+\[
+f(x) = \underbrace{P_n(f, x_0)}_{\text{pol. di Tay.}} + \underbrace{R_n(x)}_{\text{resto}}
+\]
+\[
+\vert R_n(x) \vert = \frac{\vert f^{(n+1)}(x_1) \vert \, \vert x - x_0 \vert^{n+1}}{(n+1)!} \stackrel{\text{Hp}}{\le} \frac{M L^{n+1} (b - a)^{n+1}}{(n+1)!} \to 0
+\]
+\pencilnote{(per le gerarchie)}.
+\end{proof}
