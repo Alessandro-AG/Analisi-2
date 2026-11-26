@@ -528,25 +528,33 @@ $\implies$ dimostro che $\displaystyle\oint_\gamma \omega = \oint_{\gamma_0} \om
     \begin{scope}[shift={(2.5,0)}]
         \draw[->] (-1.5,0) -- (1.5,0);
         \draw[->] (0,-1.5) -- (0,1.5);
-        % Bordatura della corona circolare e tagli lungo l'asse x
-        \draw[thick] (1.15,0) arc (0:180:1.15);
-        \draw[thick] (-1.15,0) arc (180:360:1.15);
-        \draw[thick] (-0.55,0) arc (180:0:0.55);
-        \draw[thick] (0.55,0) arc (360:180:0.55);
-        \draw[thick] (-1.15,0) -- (-0.55,0);
-        \draw[thick] (0.55,0) -- (1.15,0);
-        % Orientazione phi_1 (semipiano superiore)
-        \draw[->, thick] (0,1.15) -- (-0.1,1.15);
-        \draw[->, thick] (0,0.55) -- (0.1,0.55);
-        % Orientazione phi_2 (semipiano inferiore)
-        \draw[->, thick] (0,-1.15) -- (0.1,-1.15);
-        \draw[->, thick] (0,-0.55) -- (-0.1,-0.55);
-        % Etichette
-        \node[above right] at (0.9,0.75) {\footnotesize $\varphi_1$};
-        \node[below right] at (0.9,-0.75) {\footnotesize $\varphi_2$};
+
+        % Curva phi_1 (semipiano superiore - blu scuro)
+        \begin{scope}[yshift=0.4pt, blue!75!black]
+            \draw[thick] (1.15,0) arc (0:180:1.15);
+            \draw[thick] (-0.55,0) arc (180:0:0.55);
+            \draw[thick] (-1.15,0) -- (-0.55,0);
+            \draw[thick] (0.55,0) -- (1.15,0);
+            \draw[->, thick] (0,1.15) -- (-0.1,1.15);
+            \draw[->, thick] (0,0.55) -- (0.1,0.55);
+            \node[above right] at (0.9,0.75) {\footnotesize $\varphi_1$};
+        \end{scope}
+
+        % Curva phi_2 (semipiano inferiore - arancione)
+        \begin{scope}[yshift=-0.4pt, orange!90!black]
+            \draw[thick] (-1.15,0) arc (180:360:1.15);
+            \draw[thick] (0.55,0) arc (360:180:0.55);
+            \draw[thick] (-1.15,0) -- (-0.55,0);
+            \draw[thick] (0.55,0) -- (1.15,0);
+            \draw[->, thick] (0,-1.15) -- (0.1,-1.15);
+            \draw[->, thick] (0,-0.55) -- (-0.1,-0.55);
+            \node[below right] at (0.9,-0.75) {\footnotesize $\varphi_2$};
+        \end{scope}
     \end{scope}
 \end{tikzpicture}
 \end{center}
+
+
 $\omega$ è localmente esatta. Allora:
 \[
 \oint_{\varphi_1} \omega + \oint_{\varphi_2} \omega = 0
