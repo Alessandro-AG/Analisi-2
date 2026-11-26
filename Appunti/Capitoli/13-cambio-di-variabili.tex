@@ -318,7 +318,9 @@ Sia $f : D \subseteq \mathbb{R}^2 \to \mathbb{R}$, $f \in C^1(D)$, dove $D$ è u
 \end{theorem}
 
 \begin{proof}
-Assumiamo inizialmente che $D$ sia \underline{normale regolare rispetto a entrambi gli assi}. Dimostriamo la (1) (la (2) si dimostra in modo analogo per esercizio).
+Assumiamo inizialmente che $D$ sia \underline{normale regolare rispetto a entrambi gli assi}.
+
+Dimostriamo la (1):
 
 Possiamo guardare $D$ come dominio normale rispetto a $y$:
 \[
@@ -384,6 +386,37 @@ Sostituendo otteniamo:
 * = \int_{\gamma_1} f\, dy - \int_{-\gamma_3} f\, dy = \underbrace{\int_c^d \big[ f(\delta(t), t) - f(\gamma(t), t) \big]\, dt}_{\text{II}}
 \]
 Le espressioni I e II risultano uguali.
+
+Dimostriamo la (2):
+Supponiamo $D$ normale rispetto all'asse $x$, ossia
+\[
+D = \left\{ (x,y) \in \mathbb{R}^2 : a \le x \le b,\ \alpha(x) \le y \le \beta(x) \right\},
+\]
+con $\alpha, \beta \in C^1([a,b])$. Applicando la formula di riduzione per gli integrali doppi, si ottiene:
+\[
+\iint_D \frac{\partial f}{\partial y}(x,y) \, dx \, dy 
+= \int_a^b \left[ \int_{\alpha(x)}^{\beta(x)} \frac{\partial f}{\partial y}(x,y) \, dy \right] dx 
+= \int_a^b \big( f(x, \beta(x)) - f(x, \alpha(x)) \big) \, dx = \mathrm{I}
+\]
+Calcoliamo ora l'integrale curvilineo lungo il bordo orientato positivamente $+\partial D$. Decomponendo $+\partial D$ nei quattro tratti regolari $\gamma_1, \gamma_2, \gamma_3, \gamma_4$ percorsi in senso antiorario (rispettivamente il segmento verticale destro $x=b$, il grafico superiore $y=\beta(x)$ percorso da $b$ ad $a$, il segmento verticale sinistro $x=a$ e il grafico inferiore $y=\alpha(x)$ percorso da $a$ a $b$), abbiamo:
+\[
+\mathrm{II} = \oint_{+\partial D} f(x,y) \, dx 
+= \int_{\gamma_1} f \, dx + \int_{\gamma_2} f \, dx + \int_{\gamma_3} f \, dx + \int_{\gamma_4} f \, dx.
+\]
+Sui tratti verticali $\gamma_1$ e $\gamma_3$ la variabile $x$ è costante, per cui $dx = 0$ e i relativi integrali si annullano. Parametrizzando $-\gamma_2$ e $\gamma_4$ per $t \in [a,b]$ come
+\[
+-\gamma_2 : \begin{cases} x = t \\ y = \beta(t) \end{cases} \quad t \in [a,b], 
+\qquad 
+\gamma_4 : \begin{cases} x = t \\ y = \alpha(t) \end{cases} \quad t \in [a,b],
+\]
+da cui $x'(t) = 1$, risulta:
+\[
+\oint_{+\partial D} f(x,y) \, dx 
+= -\int_{-\gamma_2} f \, dx + \int_{\gamma_4} f \, dx 
+= \int_a^b \big( -f(t, \beta(t)) + f(t, \alpha(t)) \big) \, dt 
+= -\mathrm{I}.
+\]
+Pertanto $\mathrm{I} = -\mathrm{II}$, ovvero $\iint_D \frac{\partial f}{\partial y}(x,y) \, dx \, dy = -\oint_{+\partial D} f(x,y) \, dx$.
 
 Nel caso generale, sia $D = \displaystyle\bigcup_{i=1}^N D_i$ con ciascun $D_i$ normale regolare rispetto a entrambi gli assi e $\mathring{D}_i \cap \mathring{D}_j = \emptyset$ per $i \neq j$. Allora:
 \[
@@ -495,7 +528,27 @@ dove:
 \end{theorem}
 
 \begin{proof}
-(Per esercizio obbligatorio, applicando le formule di Gauss--Green a $F_1$ e $F_2$).
+Applicando la definizione di divergenza, la linearità dell'integrale e le formule di Gauss--Green, si ha:
+\begin{align*}
+\iint_D \operatorname{div} F \, dx \, dy 
+&= \iint_D \left( \frac{\partial F_1}{\partial x} + \frac{\partial F_2}{\partial y} \right) dx \, dy \\
+&= \iint_D \frac{\partial F_1}{\partial x} \, dx \, dy + \iint_D \frac{\partial F_2}{\partial y} \, dx \, dy \\
+&= \oint_{+\partial D} F_1 \, dy - \oint_{+\partial D} F_2 \, dx 
+= \oint_{+\partial D} (F_1 \, dy - F_2 \, dx).
+\end{align*}
+Essendo $D$ regolare, il bordo orientato positivamente $+\partial D$ è una curva regolare a tratti, parametrizzabile mediante $\gamma(t) = (x(t), y(t))$ per $t \in [a,b]$, con $\gamma'(t) = (x'(t), y'(t))$ (e $\|\gamma'(t)\| = \sqrt{x'(t)^2 + y'(t)^2} \neq 0$).
+Per definizione di integrale di linea:
+\begin{equation*}
+\oint_{+\partial D} (F_1 \, dy - F_2 \, dx) = \int_a^b \big( F_1(\gamma(t)) y'(t) - F_2(\gamma(t)) x'(t) \big) \, dt. \tag{$*$}
+\end{equation*}
+D'altra parte, poiché $+\partial D$ è percorso in senso antiorario, il versore normale esterno è dato da $N(\gamma(t)) = \frac{(y'(t), -x'(t))}{\sqrt{x'(t)^2 + y'(t)^2}}$. Ricordando che $ds = \|\gamma'(t)\| \, dt = \sqrt{x'(t)^2 + y'(t)^2} \, dt$, per definizione di integrale curvilineo risulta:
+\begin{align*}
+\oint_{+\partial D} \langle F, N \rangle \, ds 
+&= \int_a^b \left\langle F(\gamma(t)), \frac{(y'(t), -x'(t))}{\sqrt{x'(t)^2 + y'(t)^2}} \right\rangle \sqrt{x'(t)^2 + y'(t)^2} \, dt \\
+&= \int_a^b \frac{F_1(\gamma(t)) y'(t) - F_2(\gamma(t)) x'(t)}{\sqrt{x'(t)^2 + y'(t)^2}} \cdot \sqrt{x'(t)^2 + y'(t)^2} \, dt \\
+&= \int_a^b \big( F_1(\gamma(t)) y'(t) - F_2(\gamma(t)) x'(t) \big) \, dt. \tag{$**$}
+\end{align*}
+Dal confronto tra $(*)$ e $(**)$ segue la tesi.
 \end{proof}
 
 \subsection{Solidi di rotazione}
