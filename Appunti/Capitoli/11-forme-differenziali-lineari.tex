@@ -528,24 +528,25 @@ $\implies$ dimostro che $\displaystyle\oint_\gamma \omega = \oint_{\gamma_0} \om
     \begin{scope}[shift={(2.5,0)}]
         \draw[->] (-1.5,0) -- (1.5,0);
         \draw[->] (0,-1.5) -- (0,1.5);
+        % Bordatura della corona circolare e tagli lungo l'asse x
         \draw[thick] (1.15,0) arc (0:180:1.15);
+        \draw[thick] (-1.15,0) arc (180:360:1.15);
         \draw[thick] (-0.55,0) arc (180:0:0.55);
+        \draw[thick] (0.55,0) arc (360:180:0.55);
         \draw[thick] (-1.15,0) -- (-0.55,0);
         \draw[thick] (0.55,0) -- (1.15,0);
+        % Orientazione phi_1 (semipiano superiore)
         \draw[->, thick] (0,1.15) -- (-0.1,1.15);
         \draw[->, thick] (0,0.55) -- (0.1,0.55);
-        \draw[thick] (-1.15,-0.12) arc (180:360:1.15);
-        \draw[thick] (0.55,-0.12) arc (360:180:0.55);
-        \draw[thick] (-1.15,-0.12) -- (-0.55,-0.12);
-        \draw[thick] (0.55,-0.12) -- (1.15,-0.12);
-        \draw[->, thick] (0,-1.27) -- (0.1,-1.27);
-        \draw[->, thick] (0,-0.67) -- (-0.1,-0.67);
+        % Orientazione phi_2 (semipiano inferiore)
+        \draw[->, thick] (0,-1.15) -- (0.1,-1.15);
+        \draw[->, thick] (0,-0.55) -- (-0.1,-0.55);
+        % Etichette
         \node[above right] at (0.9,0.75) {\footnotesize $\varphi_1$};
-        \node[below right] at (0.9,-0.85) {\footnotesize $\varphi_2$};
+        \node[below right] at (0.9,-0.75) {\footnotesize $\varphi_2$};
     \end{scope}
 \end{tikzpicture}
 \end{center}
-
 $\omega$ è localmente esatta. Allora:
 \[
 \oint_{\varphi_1} \omega + \oint_{\varphi_2} \omega = 0
