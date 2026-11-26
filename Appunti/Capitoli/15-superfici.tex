@@ -136,42 +136,81 @@ z = z
 \pencilnote{(notazione leggermente ambigua per il doppio ruolo di $z$)} si dice \underline{superficie cilindrica}.
 
 \begin{center}
-\begin{tikzpicture}[scale=0.85]
-    % Rettangolo dei parametri [a, b] x [z_1, z_2]
-    \begin{scope}[shift={(-3.1,0)}]
+\begin{tikzpicture}[scale=0.9]
+    % Rettangolo dei parametri D = [a, b] x [z_1, z_2]
+    \begin{scope}[shift={(-3.4,0)}]
         \draw[->] (-0.3,0) -- (2.1,0) node[right] {\footnotesize $t$};
-        \draw[->] (0,-0.3) -- (0,2.0) node[above] {\footnotesize $z$};
-        \fill[gray!15] (0.5,0.45) rectangle (1.6,1.45);
-        \draw[thick] (0.5,0.45) rectangle (1.6,1.45);
-        \draw[dotted] (0.5,0.45) -- (0.5,0) node[below] {\footnotesize $a$};
-        \draw[dotted] (1.6,0.45) -- (1.6,0) node[below] {\footnotesize $b$};
-        \draw[dotted] (0.5,0.45) -- (0,0.45) node[left] {\footnotesize $z_1$};
-        \draw[dotted] (0.5,1.45) -- (0,1.45) node[left] {\footnotesize $z_2$};
-        \node at (1.05,0.95) {\footnotesize $D$};
+        \draw[->] (0,-0.3) -- (0,2.5) node[above] {\footnotesize $z$};
+        \fill[gray!15] (0.5,0.95) rectangle (1.6,2.15);
+        \draw[thick] (0.5,0.95) rectangle (1.6,2.15);
+        \draw[dotted] (0.5,0.95) -- (0.5,0) node[below] {\footnotesize $a$};
+        \draw[dotted] (1.6,0.95) -- (1.6,0) node[below] {\footnotesize $b$};
+        \draw[dotted] (0.5,0.95) -- (0,0.95) node[left] {\footnotesize $z_1$};
+        \draw[dotted] (0.5,2.15) -- (0,2.15) node[left] {\footnotesize $z_2$};
+        \node at (1.05,1.55) {\footnotesize $D$};
     \end{scope}
 
-    \draw[->] (-0.6,0.95) -- (0.6,0.95) node[midway, above] {\footnotesize $\varphi$};
+    \draw[->] (-0.85,1.55) -- (0.35,1.55) node[midway, above] {\footnotesize $\varphi$};
 
-    % Superficie cilindrica in R^3
-    \begin{scope}[shift={(1.7,0)}]
-        \draw[->] (0,0) -- (2.5,0) node[right] {\footnotesize $y$};
-        \draw[->] (0,0) -- (0,2.3) node[above] {\footnotesize $z$};
-        \draw[->] (0,0) -- (-1.0,-0.85) node[below left] {\footnotesize $x$};
+    % Cilindroide retto chiuso in R^3
+    \begin{scope}[shift={(1.3,0)}]
+        \draw[->] (0,0) -- (3.1,0) node[right] {\footnotesize $y$};
+        \draw[->] (0,0) -- (0,2.65) node[above] {\footnotesize $z$};
+        \draw[->] (0,0) -- (-1.15,-0.96) node[below left] {\footnotesize $x$};
 
-        % Curva base gamma sul piano xy
-        \draw[dashed] (0.3,-0.45) .. controls (0.9,-0.25) and (1.3,-0.65) .. (1.9,-0.4);
-        \node[below right] at (1.85,-0.4) {\footnotesize $\gamma$};
+        % Curva chiusa di base gamma sul piano xy (z = 0)
+        \draw[thick, dashed, domain=0:360, samples=90, smooth]
+            plot ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                  {-0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)});
+        \node[right] at (2.20,-0.34) {\footnotesize $\gamma$};
 
-        % Striscia cilindrica
-        \fill[gray!15] (0.3,0.55)
-            .. controls (0.9,0.75) and (1.3,0.35) .. (1.9,0.6)
-            -- (1.9,1.7)
-            .. controls (1.3,1.45) and (0.9,1.85) .. (0.3,1.65)
-            -- cycle;
-        \draw[thick] (0.3,0.55) .. controls (0.9,0.75) and (1.3,0.35) .. (1.9,0.6);
-        \draw[thick] (0.3,1.65) .. controls (0.9,1.85) and (1.3,1.45) .. (1.9,1.7);
-        \draw[thick] (0.3,0.55) -- (0.3,1.65);
-        \draw[thick] (1.9,0.6) -- (1.9,1.7);
+        % Proiezioni verticali dalla base e riferimenti prospettici z_1, z_2
+        \draw[dotted] (0.290,-0.598) -- (0.290,0.352);
+        \draw[dotted] (2.165,-0.323) -- (2.165,0.627);
+        \node[left] at (0,0.95) {\footnotesize $z_1$};
+        \node[left] at (0,2.15) {\footnotesize $z_2$};
+        \draw[dotted] (0,0.95) -- (0.290,0.352);
+        \draw[dotted] (0,2.15) -- (0.290,1.552);
+
+        % Riempimento superficie laterale e sezione superiore
+        \fill[gray!16]
+            plot[domain=-23.86:154.00, samples=50, smooth]
+                ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                 {0.95 - 0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)})
+            -- (0.290,1.552)
+            -- plot[domain=154.00:336.14, samples=50, smooth]
+                ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                 {2.15 - 0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)})
+            -- (2.165,0.627) -- cycle;
+
+        \fill[gray!7, domain=0:360, samples=90, smooth]
+            plot ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                  {2.15 - 0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)});
+
+        % Bordo inferiore a quota z_1 (anteriore continuo, posteriore tratteggiato)
+        \draw[dashed, domain=154.00:336.14, samples=50, smooth]
+            plot ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                  {0.95 - 0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)});
+        \draw[thick, domain=-23.86:154.00, samples=50, smooth]
+            plot ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                  {0.95 - 0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)});
+
+        % Sezione intermedia ripetuta a quota z
+        \draw[dotted, gray!75!black, domain=154.00:336.14, samples=50, smooth]
+            plot ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                  {1.55 - 0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)});
+        \draw[dashed, gray!85!black, domain=-23.86:154.00, samples=50, smooth]
+            plot ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                  {1.55 - 0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)});
+
+        % Bordo superiore chiuso a quota z_2
+        \draw[thick, domain=0:360, samples=90, smooth]
+            plot ({1.238 + 0.85*cos(\x) - 0.396*sin(\x) + 0.0136*sin(2*\x)},
+                  {2.15 - 0.51 - 0.33*sin(\x) - 0.072*sin(2*\x)});
+
+        % Generatrici verticali di contorno
+        \draw[thick] (0.290,0.352) -- (0.290,1.552);
+        \draw[thick] (2.165,0.627) -- (2.165,1.827);
     \end{scope}
 \end{tikzpicture}
 \end{center}
