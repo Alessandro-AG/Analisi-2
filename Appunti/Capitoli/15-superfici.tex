@@ -228,3 +228,199 @@ poiché $\gamma$ è regolare. Inoltre $\varphi_t \wedge \varphi_z = (y'(t), -x'(
 N(t, z) = \frac{\varphi_t \wedge \varphi_z}{|\varphi_t \wedge \varphi_z|} = \left( \frac{(y'(t), -x'(t))}{|\gamma'(t)|},\, 0 \right) = (N_\gamma(t), 0)
 \]
 \end{esercizio}
+
+
+% 27-11.tex -- Superficie sferica, Superfici di rotazione, Area di una superficie,
+%             Teorema di Guldino, Integrali di superficie, Orientabilità e Flusso (27/11/2026)
+
+\begin{esercizio}[Esempio 3 -- Superficie sferica]
+Sia $R > 0$. La \underline{superficie sferica} di raggio $R$ ha equazioni parametriche:
+\[
+\gamma : \begin{cases}
+x = R \sin\theta \cos\varphi \\
+y = R \sin\theta \sin\varphi \\
+z = R \cos\theta
+\end{cases}
+\qquad \theta \in [0, \pi], \ \varphi \in [0, 2\pi] \quad (D)
+\]
+Calcolando le derivate parziali rispetto a $\theta$ e $\varphi$:
+\begin{align*}
+\gamma_\theta &= (R \cos\theta \cos\varphi,\; R \cos\theta \sin\varphi,\; -R \sin\theta) \\
+\gamma_\varphi &= (-R \sin\theta \sin\varphi,\; R \sin\theta \cos\varphi,\; 0)
+\end{align*}
+si ottiene:
+\[
+|\gamma_\theta \wedge \gamma_\varphi| = R^2 \sin\theta \neq 0 \quad \text{in } ]0, \pi[ \implies \text{è regolare}
+\]
+\end{esercizio}
+
+\begin{esercizio}[Esempio 4 -- Superfici di rotazione]
+\textbf{Idea:} consideriamo una curva nel piano e una retta $r$ complanare che non la interseca, e facciamo ruotare la curva attorno a $r$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    % Schema 1: curva generatrice nel piano xz
+    \begin{scope}[shift={(-2.6,0)}]
+        \draw[->] (0,0) -- (2.1,0) node[right] {\footnotesize $x$};
+        \draw[->] (0,0) -- (0,2.3) node[above] {\footnotesize $z$};
+        \draw[->] (0,0) -- (-0.9,-0.75) node[below left] {\footnotesize $y$};
+        \draw[thick] (0.75,0.35) .. controls (1.3,0.85) and (0.65,1.4) .. (1.2,1.95) node[right] {\footnotesize $\gamma$};
+        \draw[->, thin] (-0.3,2.05) arc (150:390:0.32 and 0.11);
+    \end{scope}
+
+    % Schema 2: superficie di rotazione in R^3
+    \begin{scope}[shift={(2.3,0)}]
+        \draw[->] (0,0) -- (2.2,0) node[right] {\footnotesize $x$};
+        \draw[->] (0,0) -- (0,2.3) node[above] {\footnotesize $z$};
+        \draw[->] (0,0) -- (-0.9,-0.75) node[below left] {\footnotesize $y$};
+
+        \fill[gray!15] (0.75,0.35)
+            .. controls (1.3,0.85) and (0.65,1.4) .. (1.2,1.95)
+            arc (0:180:1.2 and 0.3)
+            .. controls (-0.65,1.4) and (-1.3,0.85) .. (-0.75,0.35)
+            arc (180:360:0.75 and 0.18) -- cycle;
+
+        % Paralleli
+        \draw[thick] (0,1.95) ellipse (1.2 and 0.3);
+        \draw[thick] (-0.75,0.35) arc (180:360:0.75 and 0.18);
+        \draw[dashed] (0.75,0.35) arc (0:180:0.75 and 0.18);
+        \draw[dashed] (-0.98,1.15) arc (180:360:0.98 and 0.24);
+        \draw[dotted] (0.98,1.15) arc (0:180:0.98 and 0.24);
+
+        % Meridiani
+        \draw[thick] (0.75,0.35) .. controls (1.3,0.85) and (0.65,1.4) .. (1.2,1.95) node[right] {\footnotesize $\gamma$};
+        \draw[thick] (-0.75,0.35) .. controls (-1.3,0.85) and (-0.65,1.4) .. (-1.2,1.95);
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\pencilnote{(Osservazione: risulterà che $\gamma$ deve essere semplice e regolare per avere la regolarità della superficie.)}
+
+Sia $\gamma$ una curva regolare e semplice del piano $xz$ e sia $z$ l'asse di rotazione. Supponiamo che:
+\[
+\gamma(t) = \begin{cases}
+x = x(t) \\
+z = z(t)
+\end{cases}
+\qquad t \in [a, b]
+\]
+La \underline{superficie di rotazione} ottenuta ruotando $\gamma$ attorno all'asse $z$ ha equazioni parametriche:
+\[
+\varphi : \begin{cases}
+x = x(t)\cos\theta \\
+y = x(t)\sin\theta \\
+z = z(t)
+\end{cases}
+\qquad \theta \in [0, 2\pi] \text{ (o fino a } \alpha\text{)}, \ t \in [a, b]
+\]
+Calcoliamo le derivate parziali e il prodotto vettoriale fondamentale:
+\begin{align*}
+\varphi_t &= (x'(t)\cos\theta,\; x'(t)\sin\theta,\; z'(t)) \\
+\varphi_\theta &= (-x(t)\sin\theta,\; x(t)\cos\theta,\; 0) \\
+\varphi_t \wedge \varphi_\theta &= \big(-z'(t)x(t)\cos\theta,\; -z'(t)x(t)\sin\theta,\; x'(t)x(t)\big)
+\end{align*}
+da cui:
+\[
+|\varphi_t \wedge \varphi_\theta|^2 = x^2(t)\big(z'^2(t) + x'^2(t)\big) = x^2(t)|\gamma'(t)|^2
+\]
+Poiché $\gamma$ è regolare, $|\gamma'(t)|^2 > 0$; quindi $|\varphi_t \wedge \varphi_\theta|^2 \neq 0$ se la curva non interseca l'asse di rotazione ($x(t) \neq 0$).
+
+\pencilnote{Se avviene che la curva interseca l'asse, conviene considerare $\gamma(t) = \gamma_1(t) \cup \gamma_2(t)$, che ruotando danno rispettivamente due superfici regolari $\varphi_1$ e $\varphi_2$.}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    \draw[->] (-1.5,0) -- (1.7,0) node[right] {\footnotesize $x$};
+    \draw[->] (0,-0.3) -- (0,2.1) node[above] {\footnotesize $z$};
+    \draw[thick] (1.3,0.35) .. controls (1.1,0.9) and (0.5,1.1) .. (0,1.2);
+    \node[right] at (1.1,0.65) {\footnotesize $\gamma_1$};
+    \draw[thick] (0,1.2) .. controls (-0.5,1.3) and (-1.0,1.6) .. (-1.2,1.95);
+    \node[left] at (-0.9,1.65) {\footnotesize $\gamma_2$};
+    \fill (0,1.2) circle (1.3pt);
+\end{tikzpicture}
+\end{center}
+
+Le ``copie'' di $\gamma$ si chiamano \underline{meridiani} e le circonferenze si chiamano \underline{paralleli}. In particolare, la superficie sferica è una particolare superficie di rotazione.
+\end{esercizio}
+
+\subsection{Area di una superficie}
+
+\begin{definition}[Area di una superficie]
+Sia $\varphi : D \subseteq \mathbb{R}^2 \to \mathbb{R}^3$ una superficie regolare. Si chiama \underline{area della superficie} $S = \varphi(D)$ (\underline{sostegno} di $\varphi$) la quantità:
+\[
+A(\varphi) = \iint_D |\varphi_u \wedge \varphi_v|\, du\, dv = \iint_D \sqrt{A^2 + B^2 + C^2}\, du\, dv \qquad (\text{o } A(S))
+\]
+\pencilnote{(dove $|\varphi_u \wedge \varphi_v|\, du\, dv$ è l'elemento di area infinitesimo, $1^{\mathrm{a}}$ forma fondamentale)}
+\end{definition}
+
+\begin{theorem}[$2^\circ$ Teorema di Guldino]
+Sia $\varphi$ la superficie di rotazione ottenuta ruotando $\gamma$ intorno a $r$, secondo quanto detto prima (nella definizione), di un angolo $\alpha$.
+
+Allora $A(\varphi)$ sarà data dal prodotto della lunghezza della curva che ruota per la lunghezza dell'arco di circonferenza descritto dal suo \underline{baricentro} nella rotazione.
+\end{theorem}
+
+\begin{esercizio}[EXE]
+Consideriamo un segmento verticale di altezza $h$ posto a distanza $R$ dall'asse $z$ e ruotiamolo di un giro completo ($\alpha = 2\pi$) attorno all'asse $z$:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+    \draw[->] (-0.4,0) -- (2.2,0) node[right] {\footnotesize $x$};
+    \draw[->] (0,-0.3) -- (0,2.1) node[above] {\footnotesize $z$};
+    \draw[thick] (1.2,0.35) -- (1.2,1.65) node[midway, right] {\footnotesize $h$};
+    \draw[dotted] (1.2,0.35) -- (1.2,0) node[below] {\footnotesize $R$};
+    \draw[dotted] (0,0.35) -- (1.2,0.35);
+    \draw[dotted] (0,1.65) -- (1.2,1.65);
+    \draw[->, thin] (-0.28,1.9) arc (150:390:0.28 and 0.09);
+\end{tikzpicture}
+\end{center}
+\[
+\implies A(\varphi) = h \cdot 2\pi R
+\]
+\end{esercizio}
+
+\subsection{Integrali di superficie e flusso}
+
+\begin{definition}[Integrale di superficie]
+Sia $\varphi$ una superficie regolare definita in $D$ e sia $S = \varphi(D)$. Sia $f : S \subseteq \mathbb{R}^3 \to \mathbb{R}$ continua. Si definisce \underline{integrale di superficie} di $f$ lungo $S$:
+\[
+\boxed{\int_S f\, d\sigma = \iint_D f(\varphi(u, v))\, |\varphi_u \wedge \varphi_v|\, du\, dv}
+\]
+\end{definition}
+
+\begin{esercizio}[EXE]
+Data la superficie parametrizzata da
+\[
+\varphi : \begin{cases}
+x = u + v \\
+y = u - v \\
+z = v^2
+\end{cases}
+\qquad (u, v) \in D = \left\{ 0 \le u \le \frac{1}{v}, \ v \in [1, 2] \right\}
+\]
+si ha:
+\[
+\int_S z\, d\sigma = \iint_D v^2\, |\varphi_u \wedge \varphi_v|\, du\, dv
+\]
+con
+\[
+\varphi_u = (1, 1, 0), \qquad \varphi_v = (1, -1, 2v)
+\]
+\end{esercizio}
+
+\begin{definition}[Superficie orientabile]
+Una superficie regolare si dice \underline{orientabile} se il \underline{campo dei versori normali} (che sappiamo essere definito in $\mathring{D}$) si può prolungare con continuità in $D$, ovvero se l'applicazione
+\[
+P \in S = \varphi(D) \longmapsto N(P) \qquad \big(P = \varphi(u, v), \ \forall (u, v) \in D\big)
+\]
+è continua.
+\end{definition}
+
+\begin{oss}
+Quando la superficie è il ``bordo'' di un solido, diciamo che il versore normale è \underline{uscente} se punta fuori ed \underline{entrante} altrimenti.
+\end{oss}
+
+\begin{definition}[Flusso di un campo vettoriale]
+Se $\varphi$ è una superficie orientabile di equazioni parametriche $\varphi = (x(u, v), y(u, v), z(u, v))$ definita su $D$ e sia $S = \varphi(D)$. Sia $F : S \to \mathbb{R}^3$ un campo; si chiama \underline{flusso} di $F$ attraverso $S$ nella direzione $N(u, v)$ indotto da $\varphi$ la seguente quantità:
+\[
+\int_S \langle F, N \rangle\, d\sigma
+\]
+\end{definition}
